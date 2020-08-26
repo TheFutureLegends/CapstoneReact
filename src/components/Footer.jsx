@@ -54,8 +54,8 @@ const Footer = () => {
                         <input
                           name="EMAIL"
                           placeholder="Enter Email"
-                          onfocus="this.placeholder = ''"
-                          onblur="this.placeholder = 'Enter Email '"
+                          onFocus="this.placeholder = ''"
+                          onBlur="this.placeholder = 'Enter Email '"
                           required
                           type="email"
                         />
