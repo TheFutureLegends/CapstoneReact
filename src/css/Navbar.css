@@ -1,0 +1,6 @@
+ul.navbar-nav, li, a {
+    color: white !important;
+}
+ul.navbar-nav, li, a.user-profile {
+    border-radius: 50px !important;
+}
