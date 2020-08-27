@@ -37,9 +37,8 @@ const BlogPage = () => {
                   <div className="justify-content-center d-flex">
                     <a
                       className="text-uppercase primary-btn loadmore-btn mt-70 mb-60"
-                      href="#"
+                      href="https://www.google.com"
                     >
-                      {" "}
                       Load More Post
                     </a>
                   </div>

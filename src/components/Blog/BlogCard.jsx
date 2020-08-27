@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 
 const BlogCard = (res) => {
-  const [state, setState] = useState();
+  const [url, setUrl] = useState();
+
+  const [state, setState] = useState({
+    title: "",
+    description: "",
+  });
 
   useEffect(() => {
-    setState("/" + res.res.slug);
-    return () => setState(false);
+    setUrl("/study-guides/" + res.res.slug);
+    return () => {
+      setState(false);
+      setUrl(false);
+    };
   }, []);
 
   return (
@@ -13,7 +21,7 @@ const BlogCard = (res) => {
       <img className="img-fluid" src="img/asset/p1.jpg" alt="" />
       <div className="date mt-20 mb-20">10 Jan 2018</div>
       <div className="detail">
-        <a href={state}>
+        <a href={url}>
           <h4 className="pb-20">{res.res.title}</h4>
         </a>
         <p>{res.res.description}</p>

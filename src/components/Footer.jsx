@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 // import {
 //   MDBCol,
 //   MDBContainer,
@@ -20,16 +20,16 @@ const Footer = () => {
                 <h6>Top Products</h6>
                 <ul className="footer-nav">
                   <li>
-                    <a href="#">Managed Website</a>
+                    <a href="https://www.google.com">Managed Website</a>
                   </li>
                   <li>
-                    <a href="#">Manage Reputation</a>
+                    <a href="https://www.google.com">Manage Reputation</a>
                   </li>
                   <li>
-                    <a href="#">Power Tools</a>
+                    <a href="https://www.google.com">Power Tools</a>
                   </li>
                   <li>
-                    <a href="#">Marketing Service</a>
+                    <a href="https://www.google.com">Marketing Service</a>
                   </li>
                 </ul>
               </div>
@@ -86,7 +86,7 @@ const Footer = () => {
             <p className="col-lg-8 col-sm-12 footer-text">
               Copyright © All rights reserved {" "}
               <i className="fa fa-heart-o" aria-hidden="true" /> by{" "}
-              <a href="#" target="_blank">
+              <a href="https://www.google.com" target="_blank">
                 RMIT Developer Club
               </a>
             </p>
