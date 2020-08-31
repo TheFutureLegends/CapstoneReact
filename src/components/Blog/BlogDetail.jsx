@@ -18,7 +18,7 @@ const BlogDetail = (url) => {
   const [comment, setComment] = useState([]);
 
   useEffect(async () => {
-    const post_result = await axios(`http://localhost:8000/api/blogs/${slug}/`);
+    const post_result = await axios(`http://localhost:8000/api/posts/${slug}/`);
 
     setPost({
       title: post_result.data.title,
@@ -27,15 +27,15 @@ const BlogDetail = (url) => {
     });
 
     const author_result = await axios(
-      `http://localhost:8000/api/users/${post.author_id}`
+      `http://localhost:8000/api/users/${post_result.data.author_id}/`
     );
 
     setAuthor({
-      name: author_result.data[0].name,
+      name: author_result.data.name,
     });
 
     const comment_result = await axios(
-      `http://localhost:8000/api/blogs/${slug}/comments/`
+      `http://localhost:8000/api/post/${slug}/comments/`
     );
 
     setComment(comment_result.data);
@@ -46,7 +46,6 @@ const BlogDetail = (url) => {
       setComment(false);
     };
   }, []);
-  // console.log(comment);
   return (
     <div>
       {/* <!-- Start top-section Area --> */}
@@ -81,7 +80,11 @@ const BlogDetail = (url) => {
             <div className="row justify-content-center">
               <div className="col-lg-8">
                 <div className="single-page-post">
-                  <img className="img-fluid" src="img/single.jpg" alt="" />
+                  <img
+                    className="img-fluid"
+                    src="/img/header-bg.jpg"
+                    alt=""
+                  />
                   <div className="top-wrapper ">
                     <div className="row d-flex justify-content-between">
                       <h2 className="col-lg-8 col-md-12 text-uppercase">

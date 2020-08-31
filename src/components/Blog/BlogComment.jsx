@@ -6,11 +6,14 @@ const BlogComment = (data) => {
     name: "",
     content: "",
   });
-  const [posts, setPost] = useState([]);
 
   useEffect(() => {
-    
-    return () => setPost(false);
+    setComment({
+      name: data.data.name,
+      content: data.data.content,
+    });
+
+    return () => setComment(false);
   }, []);
   return (
     <div className="comment-list">
@@ -21,10 +24,10 @@ const BlogComment = (data) => {
           </div>
           <div className="desc">
             <h5>
-              <a href="#">Emilly Blunt</a>
+              <a href="#">{comment.name}</a>
             </h5>
             <p className="date">December 4, 2017 at 3:12 pm </p>
-            <p className="comment">Never say goodbye till the end comes!</p>
+            <p className="comment">{comment.content}</p>
           </div>
         </div>
         <div className="reply-btn">

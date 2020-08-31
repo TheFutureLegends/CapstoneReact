@@ -6,7 +6,7 @@ const BlogPage = () => {
   const [posts, setPost] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/blogs/").then((res) => {
+    axios.get("http://localhost:8000/api/posts/").then((res) => {
       setPost(res.data);
     });
     return () => setPost(false);
