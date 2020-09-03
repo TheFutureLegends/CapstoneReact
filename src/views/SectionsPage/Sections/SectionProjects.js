@@ -39,6 +39,11 @@ import cardProject4 from "assets/img/examples/card-project4.jpg";
 import cardProject5 from "assets/img/examples/card-project5.jpg";
 import cardProject6 from "assets/img/examples/card-project6.jpg";
 
+import {
+  strip_tags,
+  substring_description,
+} from "views/_partials/Miscellaneous.js";
+
 const useStyles = makeStyles(projectsStyle);
 
 const SectionProjects = ({ ...rest }) => {
@@ -56,28 +61,6 @@ const SectionProjects = ({ ...rest }) => {
     cardProject5,
     cardProject6,
   ];
-
-  const strip_tags = (input, allowed) => {
-    allowed = (
-      ((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []
-    ).join("");
-    const tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
-    return input.replace(tags, ($0, $1) =>
-      allowed.indexOf("<" + $1.toLowerCase() + ">") > -1 ? $0 : ""
-    );
-  };
-
-  const substring_description = (str) => {
-    var splitstr = str.split(" ");
-
-    var result = "";
-
-    for (let index = 0; index < 10; index++) {
-      result += splitstr[index] + " ";
-    }
-
-    return result + "...";
-  };
 
   useEffect(() => {
     axios.get("http://localhost:8000/api/posts/latest/").then((res) => {
@@ -124,7 +107,7 @@ const SectionProjects = ({ ...rest }) => {
                       <h6 className={classes.cardCategory}>PRODUCTIVITY</h6>
                       <a href={"/study-guide/" + response.slug}>
                         <h3 className={classes.cardTitleWhite}>
-                          {response.title}
+                          {substring_description(response.title, 4)}
                         </h3>
                       </a>
                       <p
@@ -163,7 +146,7 @@ const SectionProjects = ({ ...rest }) => {
                       <h6 className={classes.cardCategory}>MARKETING</h6>
                       <a href={"/study-guide/" + response.slug}>
                         <h3 className={classes.cardTitleWhite}>
-                          {response.title}
+                          {substring_description(response.title, 4)}
                         </h3>
                       </a>
                       <p

@@ -23,7 +23,10 @@ import dg1 from "assets/img/dg1.jpg";
 import dg2 from "assets/img/dg2.jpg";
 import dg3 from "assets/img/dg3.jpg";
 
-import NavBar from "views/_partials/NavBar";
+import {
+  strip_tags,
+  substring_description,
+} from "views/_partials/Miscellaneous.js";
 
 const useStyles = makeStyles(headersStyle);
 
@@ -43,16 +46,6 @@ const SectionHeaders = ({ ...rest }) => {
 
   const bgArray = [dg1, dg2, dg3];
 
-  const strip_tags = (input, allowed) => {
-    allowed = (
-      ((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []
-    ).join("");
-    const tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
-    return input.replace(tags, ($0, $1) =>
-      allowed.indexOf("<" + $1.toLowerCase() + ">") > -1 ? $0 : ""
-    );
-  };
-
   useEffect(() => {
     axios.get("http://localhost:8000/api/posts/slider/").then((res) => {
       setSliderPosts(res.data);
@@ -67,7 +60,7 @@ const SectionHeaders = ({ ...rest }) => {
     <div className="cd-section" {...rest}>
       {/* HEADER 3 START */}
       <div>
-        <NavBar></NavBar>
+        {/* <NavBar></NavBar> */}
         <Carousel {...settings}>
           {/* Carousel 1 START */}
           {sliderPosts.map((response, i) => (
@@ -83,10 +76,14 @@ const SectionHeaders = ({ ...rest }) => {
                 <div className={classes.container}>
                   <GridContainer>
                     <GridItem xs={12} sm={8} md={8}>
-                      <h1 className={classes.title}>{response.title}</h1>
+                      <h1 className={classes.title}>
+                        {substring_description(response.title, 10)}
+                      </h1>
                       <h4
                         dangerouslySetInnerHTML={{
-                          __html: strip_tags(response.description),
+                          __html: substring_description(
+                            strip_tags(response.description)
+                          ),
                         }}
                       ></h4>
                       <br />

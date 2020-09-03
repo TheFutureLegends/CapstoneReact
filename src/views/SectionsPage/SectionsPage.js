@@ -15,6 +15,7 @@ import SectionProjects from "./Sections/SectionProjects.js";
 // import SectionTestimonials from "./Sections/SectionTestimonials.js";
 import SectionContacts from "./Sections/SectionContacts.js";
 import FooterBar from "views/_partials/FooterBar.js";
+import NavBar from "views/_partials/NavBar";
 
 import sectionsPageStyle from "assets/jss/material-kit-pro-react/views/sectionsPageStyle.js";
 
@@ -276,6 +277,7 @@ export default function SectionsPage() {
     //   </nav>
     // </div>
     <div className={classes.main}>
+      <NavBar></NavBar>
       <SectionHeaders id="headers" />
       <SectionFeatures id="features" />
       <SectionBlogs id="blogs" />

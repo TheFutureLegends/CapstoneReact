@@ -24,6 +24,11 @@ import blog5 from "assets/img/examples/blog5.jpg";
 import blog6 from "assets/img/examples/blog6.jpg";
 import blog7 from "assets/img/examples/blog7.jpg";
 import blog8 from "assets/img/examples/blog8.jpg";
+
+import {
+  strip_tags,
+  substring_description,
+} from "views/_partials/Miscellaneous.js";
 // import Button from "components/CustomButtons/Button.js";
 // import cardBlog4 from "assets/img/examples/card-blog4.jpg";
 // import office2 from "assets/img/office2.jpg";
@@ -44,34 +49,6 @@ const SectionBlogs = ({ ...rest }) => {
     blog7,
     blog8,
   ];
-
-  const strip_tags = (input, allowed) => {
-    allowed = (
-      ((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []
-    ).join("");
-    const tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
-    return input.replace(tags, ($0, $1) =>
-      allowed.indexOf("<" + $1.toLowerCase() + ">") > -1 ? $0 : ""
-    );
-  };
-
-  const substring_description = (str, slug) => {
-    var splitstr = str.split(" ");
-
-    var result = "";
-
-    for (let index = 0; index < 10; index++) {
-      result += splitstr[index] + " ";
-    }
-
-    return (
-      result.trim() +
-      "... " +
-      '<a href="/study-guide/' +
-      slug +
-      '">Read More</a>'
-    );
-  };
 
   useEffect(() => {
     axios.get("http://localhost:8000/api/posts/popular/").then((res) => {
@@ -132,7 +109,7 @@ const SectionBlogs = ({ ...rest }) => {
                         </Danger>
                         <h4 className={classes.cardTitle}>
                           <a href={"/study-guide/" + response.slug}>
-                            {response.title}
+                            {substring_description(response.title ,4)}
                           </a>
                         </h4>
                         <p
