@@ -71,31 +71,35 @@ export const strip_tags = (input, allowed) => {
 };
 
 export const substring_description = (str = null, limit = 10, slug = null) => {
-  var splitstr = str.split(" ");
+  if (str != null) {
+    var splitstr = str.split(" ");
 
-  var result = "";
+    var result = "";
 
-  if (splitstr.length > limit) {
-    for (let index = 0; index < limit; index++) {
-      result += splitstr[index] + " ";
+    if (splitstr.length > limit) {
+      for (let index = 0; index < limit; index++) {
+        result += splitstr[index] + " ";
+      }
+    } else {
+      for (let index = 0; index < splitstr.length; index++) {
+        result += splitstr[index] + " ";
+      }
     }
-  } else {
-    for (let index = 0; index < splitstr.length; index++) {
-      result += splitstr[index] + " ";
+
+    if (slug != null) {
+      return (
+        result.trim() +
+        "... " +
+        '<a href="/study-guide/' +
+        slug +
+        '">Read More</a>'
+      );
     }
+
+    return result.trim() + "...";
   }
 
-  if (slug != null) {
-    return (
-      result.trim() +
-      "... " +
-      '<a href="/study-guide/' +
-      slug +
-      '">Read More</a>'
-    );
-  }
-
-  return result.trim() + "...";
+  return "";
 };
 
 export const getRandomInt = (min, max) => {

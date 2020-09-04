@@ -1,5 +1,6 @@
 /*eslint-disable*/
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 // nodejs library to set properties for components
 // import PropTypes from "prop-types";
 // @material-ui/core components
@@ -28,29 +29,54 @@ import blogPostPageStyle from "assets/jss/material-kit-pro-react/views/blogPostP
 
 import NavBar from "views/_partials/NavBar";
 import FooterBar from "views/_partials/FooterBar.js";
+import { baseApiUrl, nytime_api } from "services/Api.js";
 
 const useStyles = makeStyles(blogPostPageStyle);
 
-const BlogPostPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
+const BlogPostPage = (props) => {
+  const [blogPost, setBlogPost] = useState({
+    image: "",
+    title: "",
+    content: "",
   });
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.nytimes.com/svc/topstories/v2/world.json?api-key=${nytime_api}`
+      )
+      .then((res) => {
+        console.log(res);
+      });
+    axios.get(baseApiUrl + "/post/" + props.match.params.slug).then((res) => {
+      setBlogPost({
+        image: res.data.urlToImage,
+        title: res.data.title,
+        content: res.data.content,
+      });
+    });
+
+    window.scrollTo(0, 0);
+
+    document.body.scrollTop = 0;
+
+    return () => {
+      setBlogPost(false);
+    };
+  }, []);
   const classes = useStyles();
   return (
     <div>
       <NavBar></NavBar>
-      <Parallax image={require("assets/img/bg5.jpg")} filter="dark">
+      <Parallax image={blogPost.image} filter="dark">
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem md={8} className={classes.textCenter}>
-              <h1 className={classes.title}>
-                How We Built the Most Successful Castle Ever
-              </h1>
-              <h4 className={classes.subtitle}>
+              <h1 className={classes.title}>{blogPost.title}</h1>
+              {/* <h4 className={classes.subtitle}>
                 The last 48 hours of my life were total madness. This is what I
                 did.
-              </h4>
+              </h4> */}
               <br />
               <Button color="rose" size="lg" round>
                 <FormatAlignLeft /> Read Article
@@ -61,7 +87,7 @@ const BlogPostPage = () => {
       </Parallax>
       <div className={classes.main}>
         <div className={classes.container}>
-          <SectionText />
+          <SectionText description={blogPost.content} />
           <SectionBlogInfo />
           <SectionComments />
         </div>

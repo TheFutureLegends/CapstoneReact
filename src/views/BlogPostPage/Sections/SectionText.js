@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -17,16 +17,33 @@ import sectionTextStyle from "assets/jss/material-kit-pro-react/views/blogPostSe
 
 const useStyles = makeStyles(sectionTextStyle);
 
-export default function SectionText() {
+const SectionText = (props) => {
   const classes = useStyles();
+
   const imgClasses = classNames(
     classes.imgRaised,
     classes.imgRounded,
     classes.imgFluid
   );
+
+  const { ...rest } = props;
+
+  useEffect(() => {
+    return () => {
+      // setState(false);
+    };
+  }, []);
   return (
     <div className={classes.section}>
       <GridContainer justify="center">
+        <GridItem
+          xs={12}
+          sm={8}
+          md={8}
+          dangerouslySetInnerHTML={{
+            __html: rest.description,
+          }}
+        ></GridItem>
         <GridItem xs={12} sm={8} md={8}>
           <h3 className={classes.title}>
             The Castle Looks Different at Night...
@@ -96,4 +113,6 @@ export default function SectionText() {
       </GridContainer>
     </div>
   );
-}
+};
+
+export default SectionText;

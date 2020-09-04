@@ -1,14 +1,15 @@
 /*eslint-disable*/
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+// import List from "@material-ui/core/List";
+// import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
-import Favorite from "@material-ui/icons/Favorite";
+// import Favorite from "@material-ui/icons/Favorite";
 // core components
-import Header from "components/Header/Header.js";
-import Button from "components/CustomButtons/Button.js";
+// import Header from "components/Header/Header.js";
+// import Button from "components/CustomButtons/Button.js";
 // import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -16,27 +17,33 @@ import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
 // sections for this page
 import SectionCards from "./Sections/SectionCards.js";
-import SectionPills from "./Sections/SectionPills.js";
-import SectionInterested from "./Sections/SectionInterested.js";
+// import SectionPills from "./Sections/SectionPills.js";
+// import SectionInterested from "./Sections/SectionInterested.js";
 import SectionImage from "./Sections/SectionImage.js";
 import SubscribeLine from "./Sections/SubscribeLine.js";
 
 import blogPostsPageStyle from "assets/jss/material-kit-pro-react/views/blogPostsPageStyle.js";
-import styles from "assets/jss/material-kit-pro-react/views/componentsSections/sectionCards.js";
 
 import NavBar from "views/_partials/NavBar";
 import FooterBar from "views/_partials/FooterBar.js";
 
+// import { CheckLoggedIn } from "views/_partials/Api.js";
+
 const useStyles = makeStyles(blogPostsPageStyle);
-const cardStyles = makeStyles(styles);
 
 export default function BlogPostsPage() {
+  const history = useHistory();
+
   useEffect(() => {
+    // CheckLoggedIn();
+
     window.scrollTo(0, 0);
+
     document.body.scrollTop = 0;
   });
+
   const classes = useStyles();
-  const cardClasses = cardStyles();
+
   return (
     <div>
       <NavBar></NavBar>

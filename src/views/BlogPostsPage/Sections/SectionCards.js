@@ -29,9 +29,9 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 // For filter
 // @material-ui/core components
-import InputAdornment from "@material-ui/core/InputAdornment";
+// import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui icons
-import People from "@material-ui/icons/People";
+// import People from "@material-ui/icons/People";
 // core components
 import CustomInput from "components/CustomInput/CustomInput.js";
 
@@ -47,6 +47,10 @@ import styles from "assets/jss/material-kit-pro-react/views/componentsSections/s
 
 import { string_to_slug, getRandomInt } from "views/_partials/Miscellaneous.js";
 
+import { baseApiUrl, news_api } from "services/Api.js";
+
+import { useInfiniteScroll } from "views/_partials/useInfiniteScroll.js";
+
 const useStyles = makeStyles(styles);
 
 const SectionCards = () => {
@@ -54,7 +58,12 @@ const SectionCards = () => {
   //   refresh_token: "",
   //   access_token: "",
   // });
-  const [author, setAuthor] = useState({
+
+  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreItems);
+
+  const [page, setPage] = useState(1);
+
+  const [author] = useState({
     name: "",
   });
 
@@ -128,7 +137,7 @@ const SectionCards = () => {
               <h6 className={classes.cardCategory}>Legal</h6>
             </Success>
             <h4 className={classes.cardTitle}>
-              <a href={response.url}>{response.title}</a>
+              <a href={"/study-guide/" + response.slug}>{response.title}</a>
             </h4>
             <p className={classes.cardDescription}>{response.description}</p>
           </CardBody>
@@ -161,7 +170,7 @@ const SectionCards = () => {
               </h6>
             </Danger>
             <h4 className={classes.cardTitle}>
-              <a href={response.url}>{response.title}</a>
+              <a href={"/study-guide/" + response.slug}>{response.title}</a>
             </h4>
           </CardBody>
           <CardFooter>
@@ -181,7 +190,7 @@ const SectionCards = () => {
               </h6>
             </Danger>
             <h4 className={classes.cardTitle}>
-              <a href={response.url}>{response.title}</a>
+              <a href={"/study-guide/" + response.slug}>{response.title}</a>
             </h4>
             <p className={classes.cardDescription}>{response.description}</p>
           </CardBody>
@@ -195,18 +204,16 @@ const SectionCards = () => {
     }
   };
 
-  function handleSeedDatabase() {
+  function handleClick() {
     axios
-      .get(
-        "https://newsapi.org/v2/top-headlines?country=us&apiKey=e9d9b57095a94eeb8d6287c3f271bc42"
-      )
+      .get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${news_api}`)
       .then((res) => {
         seedDatabase(res.data.articles);
       });
 
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=apple&from=2020-09-01&to=2020-09-01&sortBy=popularity&apiKey=e9d9b57095a94eeb8d6287c3f271bc42`
+        `https://newsapi.org/v2/everything?q=apple&from=2020-09-01&to=2020-09-01&sortBy=popularity&apiKey=${news_api}`
       )
       .then((res) => {
         seedDatabase(res.data.articles);
@@ -223,7 +230,7 @@ const SectionCards = () => {
 
       axios({
         method: "get",
-        url: "http://localhost:8000/api/post/" + slug + "/",
+        url: baseApiUrl + "/post/" + slug + "/",
       })
         .then((res) => {})
         .catch((error) => {
@@ -252,114 +259,52 @@ const SectionCards = () => {
     });
   }
 
+  // function loadData(isLoading) {
+  //   if (isLoading) {
+  //     axios.get(baseApiUrl + "/posts/paginator/?page=" + page).then((res) => {
+  //       setGridItem(res.data.results);
+  //     });
+  //   }
+  // }
+
+  function fetchMoreItems() {
+    // setTimeout(() => {
+
+    // }, 2000);
+
+    if (isFetching) {
+      setPage(page + 1);
+
+      axios
+        .get(baseApiUrl + "/posts/paginator/?page=" + (page + 1))
+        .then((res) => {
+          setGridItem(res.data.results);
+        })
+        .catch((error) => {
+          if (error.response.status === 404) {
+            setIsFetching(false);
+          }
+        });
+    }
+
+    setIsFetching(false);
+  }
+
   useEffect(() => {
-    axios.get("http://localhost:8000/api/posts/").then((res) => {
-      setGridItem(res.data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    axios.get(baseApiUrl + "/posts/paginator/?page=" + page).then((res) => {
+      setGridItem(res.data.results);
     });
-    axios
-      .get(
-        "https://newsapi.org/v2/top-headlines?country=us&apiKey=e9d9b57095a94eeb8d6287c3f271bc42"
-      )
-      .then((res) => {
-        seedDatabase(res.data.articles);
-      });
 
-    axios
-      .get(
-        `https://newsapi.org/v2/everything?q=apple&from=2020-09-01&to=2020-09-01&sortBy=popularity&apiKey=e9d9b57095a94eeb8d6287c3f271bc42`
-      )
-      .then((res) => {
-        seedDatabase(res.data.articles);
-      });
-
-    // Access Token dfa2ee94942f9bd75f03fe409c46896b0761a434
-    // Refresh Token: 3a25fbb849f3424bf5fb232e67e56ffa89e92881
-
-    // Client id: 3572fd91cd88d06
-    // Client secret: "3a25fbb849f3424bf5fb232e67e56ffa89e92881",
-
-    // Secret: d0da4898b887f7e32c5a00d666cd56d501735d57
-
-    // const url = "https://api.imgur.com/3/account/me/images";
-
-    // const authorize = "https://api.imgur.com/oauth2/authorize";
-
-    // const token = "	https://api.imgur.com/oauth2/token";
-
-    // let header = new Headers();
-
-    // headers.append("Content-Type", "application/json");
-    // headers.append("Accept", "application/json");
-
-    // headers.append("Access-Control-Allow-Origin", "*");
-    // headers.append("Access-Control-Allow-Headers", "accept, content-type");
-
-    // headers.append("GET", "POST", "OPTIONS");
-
-    // headers.append("Authorization", "Client-ID 3572fd91cd88d06");
-
-    // header.append("response_type", "token");
-
-    // header.append("client_id", "3572fd91cd88d06");
-
-    // axios({
-    //   method: "get",
-    //   url: token,
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Access-Control-Allow-Credentials": true,
-    //     "Access-Control-Allow-Headers": "*",
-    //     "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, DELETE",
-    //     client_id: "ed8cb77a5110fac",
-    //     client_secret: "d0da4898b887f7e32c5a00d666cd56d501735d57",
-    //     grant_type: "authorization_code",
-    //     code: "709703f9d88ae58a3c0cae7ba7ba8db0998b109c",
-    //   },
-    // }).then((res) => {
-    //   console.log(res);
-    // });
-    // axios({
-    //   method: "get",
-    //   url: "https://api.imgur.com/oauth2/authorize",
-    //   headers: {
-    //     "Access-Control-Allow-Headers": "Content-Type",
-    //     Authorization: "Client-ID " + "3572fd91cd88d06",
-    //     response_type: "token",
-    //     client_id: "3572fd91cd88d06",
-    //     // "Cache-Control": null, // this is what will match the response headers
-    //     // "X-Requested-With": null,
-    //   },
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    // axios({
-    //   method: "get",
-    //   url: "https://api.imgur.com/3/account/me/images",
-    //   headers: {
-    //     Authorization: "Bearer 2edfdeab017d12db5ccfc2ccdc4ee1b6344ed9c8",
-    //   },
-    // })
-    //   .then(function (response) {
-    //     response.data.data.map((response, i) =>
-    //       blogCardImage.array.push(response.link)
-    //     );
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    // window.addEventListener("scroll", handleScroll);
 
     return () => {
-      setGridItem(false);
-      seedDatabase(false);
-      setAuthor(false);
+      // window.removeEventListener("scroll", handleScroll);
+      setGridItem();
+      seedDatabase();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <div className="cd-section" id="cards">
       <div className={classes.sectionWhite + " " + classes.cardPaddingTop}>
@@ -368,9 +313,9 @@ const SectionCards = () => {
         <div>
           <div className={classes.container}>
             {/* <div className={classes.title}>
-                <h2>Cards</h2>
-                <h3>Blog Cards</h3>
-              </div> */}
+              <h2>You clicked {offSet} times</h2>
+              <h3>Blog Cards</h3>
+            </div> */}
             <GridContainer>
               <GridItem xs={12} sm={12} md={8}>
                 <CustomInput
@@ -387,7 +332,7 @@ const SectionCards = () => {
                 <Button
                   type="button"
                   color="danger"
-                  onClick={() => handleSeedDatabase()}
+                  onClick={() => handleClick()}
                 >
                   Seed Database
                 </Button>

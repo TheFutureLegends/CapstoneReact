@@ -1,19 +1,21 @@
 /*eslint-disable*/
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+// import List from "@material-ui/core/List";
+// import ListItem from "@material-ui/core/ListItem";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
-import Favorite from "@material-ui/icons/Favorite";
-import Face from "@material-ui/icons/Face";
+// import Favorite from "@material-ui/icons/Favorite";
+// import Face from "@material-ui/icons/Face";
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
-import Footer from "components/Footer/Footer.js";
+// import Header from "components/Header/Header.js";
+// import HeaderLinks from "components/Header/HeaderLinks.js";
+// import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
@@ -23,31 +25,74 @@ import CardHeader from "components/Card/CardHeader.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 import loginPageStyle from "assets/jss/material-kit-pro-react/views/loginPageStyle.js";
+import NavBar from "views/_partials/NavBar";
 
 import image from "assets/img/bg7.jpg";
+import AuthService from "services/auth.service";
 
 const useStyles = makeStyles(loginPageStyle);
 
-export default function LoginPage() {
-  React.useEffect(() => {
+const LoginPage = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const onChangeUsername = (e) => {
+    const username_value = e.target.value;
+
+    setUsername(username_value);
+  };
+
+  const onChangePassword = (e) => {
+    const password_value = e.target.value;
+
+    setPassword(password_value);
+  };
+
+  let history = useHistory();
+
+  function submitForm(e) {
+    e.preventDefault();
+
+    // HandleLogin(username, password);
+
+    AuthService.login(username, password).then(() => {
+      history.push("/");
+      window.location.reload();
+    });
+  }
+
+  // let history = useHistory();
+
+  // function handleRedirect() {
+  //   console.log(redirect);
+
+  //   if (redirect) {
+  //     history.push("/");
+  //   }
+  // }
+
+  useEffect(() => {
     window.scrollTo(0, 0);
+
     document.body.scrollTop = 0;
-  });
+
+    return () => {};
+  }, []);
+
   const classes = useStyles();
+
+  console.log(isLoggedIn);
+
   return (
     <div>
-      <Header
-        absolute
-        color="transparent"
-        brand="Material Kit PRO React"
-        links={<HeaderLinks dropdownHoverColor="info" />}
-      />
+      <NavBar></NavBar>
       <div
         className={classes.pageHeader}
         style={{
           backgroundImage: "url(" + image + ")",
           backgroundSize: "cover",
-          backgroundPosition: "top center"
+          backgroundPosition: "top center",
         }}
       >
         <div className={classes.container}>
@@ -66,7 +111,7 @@ export default function LoginPage() {
                         justIcon
                         color="transparent"
                         className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
+                        onClick={(e) => e.preventDefault()}
                       >
                         <i className="fab fa-twitter" />
                       </Button>
@@ -74,7 +119,7 @@ export default function LoginPage() {
                         justIcon
                         color="transparent"
                         className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
+                        onClick={(e) => e.preventDefault()}
                       >
                         <i className="fab fa-facebook" />
                       </Button>
@@ -82,7 +127,7 @@ export default function LoginPage() {
                         justIcon
                         color="transparent"
                         className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
+                        onClick={(e) => e.preventDefault()}
                       >
                         <i className="fab fa-google-plus-g" />
                       </Button>
@@ -93,43 +138,31 @@ export default function LoginPage() {
                   </p>
                   <CardBody signup>
                     <CustomInput
-                      id="first"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        placeholder: "First Name...",
-                        type: "text",
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Face className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
                       id="email"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
+                      value={username}
                       inputProps={{
-                        placeholder: "Email...",
+                        placeholder: "Username...",
                         type: "email",
+                        onChange: onChangeUsername,
                         startAdornment: (
                           <InputAdornment position="start">
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
-                        )
+                        ),
                       }}
                     />
                     <CustomInput
                       id="pass"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         placeholder: "Password",
                         type: "password",
+                        onChange: onChangePassword,
                         startAdornment: (
                           <InputAdornment position="start">
                             <Icon className={classes.inputIconsColor}>
@@ -137,13 +170,18 @@ export default function LoginPage() {
                             </Icon>
                           </InputAdornment>
                         ),
-                        autoComplete: "off"
+                        autoComplete: "off",
                       }}
                     />
                   </CardBody>
                   <div className={classes.textCenter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
+                    <Button
+                      simple
+                      color="primary"
+                      size="lg"
+                      onClick={(e) => submitForm(e)}
+                    >
+                      Login
                     </Button>
                   </div>
                 </form>
@@ -151,64 +189,10 @@ export default function LoginPage() {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer
-          className={classes.footer}
-          content={
-            <div>
-              <div className={classes.left}>
-                <List className={classes.list}>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      Creative Tim
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/presentation?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      About us
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="//blog.creative-tim.com/"
-                      className={classes.block}
-                    >
-                      Blog
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://www.creative-tim.com/license?ref=mkpr-login"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      Licenses
-                    </a>
-                  </ListItem>
-                </List>
-              </div>
-              <div className={classes.right}>
-                &copy; {1900 + new Date().getYear()} , made with{" "}
-                <Favorite className={classes.icon} /> by{" "}
-                <a
-                  href="https://www.creative-tim.com?ref=mkpr-login"
-                  target="_blank"
-                >
-                  Creative Tim
-                </a>{" "}
-                for a better web
-              </div>
-            </div>
-          }
-        />
+        {/* <FooterBar></FooterBar> */}
       </div>
     </div>
   );
-}
+};
+
+export default LoginPage;
