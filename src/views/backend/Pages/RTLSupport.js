@@ -11,33 +11,25 @@ import Cloud from "@material-ui/icons/Cloud";
 import FormatQuote from "@material-ui/icons/FormatQuote";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Table from "components/frontend/Table/Table.js";
-import Timeline from "components/frontend/Timeline/Timeline.js";
-import Button from "components/frontend/CustomButtons/Button.js";
-import CustomTabs from "components/frontend/CustomTabs/CustomTabs.js";
-import Tasks from "components/frontend/Tasks/Tasks.js";
-import Card from "components/frontend/Card/Card.js";
-import CardHeader from "components/frontend/Card/CardHeader.js";
-import CardAvatar from "components/frontend/Card/CardAvatar.js";
-import CardText from "components/frontend/Card/CardText.js";
-import CardBody from "components/frontend/Card/CardBody.js";
-import CardFooter from "components/frontend/Card/CardFooter.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Table from "components/backend/Table/Table.js";
+import Timeline from "components/backend/Timeline/Timeline.js";
+import Button from "components/backend/CustomButtons/Button.js";
+import CustomTabs from "components/backend/CustomTabs/CustomTabs.js";
+import Tasks from "components/backend/Tasks/Tasks.js";
+import Card from "components/backend/Card/Card.js";
+import CardHeader from "components/backend/Card/CardHeader.js";
+import CardAvatar from "components/backend/Card/CardAvatar.js";
+import CardText from "components/backend/Card/CardText.js";
+import CardBody from "components/backend/Card/CardBody.js";
+import CardFooter from "components/backend/Card/CardFooter.js";
 
-import {
-  rtlStories,
-  rtlBugs,
-  rtlWebsite,
-  rtlServer,
-} from "variables/general.js";
+import { rtlStories, rtlBugs, rtlWebsite, rtlServer } from "data/general.js";
 
 import image from "assets/img/faces/card-profile1-square.jpg";
 
-import {
-  cardTitle,
-  roseColor,
-} from "assets/jss/material-dashboard-pro-react.js";
+import { cardTitle, roseColor } from "assets/jss/backend.js";
 
 const styles = {
   cardTitle,

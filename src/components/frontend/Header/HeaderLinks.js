@@ -39,8 +39,8 @@ import LineStyle from "@material-ui/icons/LineStyle";
 import Error from "@material-ui/icons/Error";
 
 // core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
-import Button from "components/CustomButtons/Button.js";
+import CustomDropdown from "components/frontend/CustomDropdown/CustomDropdown.js";
+import Button from "components/frontend/CustomButtons/Button.js";
 
 import styles from "assets/jss/frontend/components/headerLinksStyle.js";
 
@@ -247,7 +247,7 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-pro-react?ref=mkpr-navbar"
+          href="/"
           color={window.innerWidth < 960 ? "info" : "white"}
           target="_blank"
           className={classes.navButton}

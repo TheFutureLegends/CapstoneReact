@@ -8,18 +8,18 @@ import Dvr from "@material-ui/icons/Dvr";
 import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Button from "components/frontend/CustomButtons/Button.js";
-import Card from "components/frontend/Card/Card.js";
-import CardBody from "components/frontend/Card/CardBody.js";
-import CardIcon from "components/frontend/Card/CardIcon.js";
-import CardHeader from "components/frontend/Card/CardHeader.js";
-import ReactTable from "components/frontend/ReactTable/ReactTable.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Button from "components/backend/CustomButtons/Button.js";
+import Card from "components/backend/Card/Card.js";
+import CardBody from "components/backend/Card/CardBody.js";
+import CardIcon from "components/backend/Card/CardIcon.js";
+import CardHeader from "components/backend/Card/CardHeader.js";
+import ReactTable from "components/backend/ReactTable/ReactTable.js";
 
-import { dataTable } from "variables/general.js";
+import { dataTable } from "data/general.js";
 
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import { cardTitle } from "assets/jss/backend.js";
 
 const styles = {
   cardIconTitle: {

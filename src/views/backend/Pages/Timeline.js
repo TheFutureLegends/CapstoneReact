@@ -1,14 +1,14 @@
 import React from "react";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Heading from "components/frontend/Heading/Heading.js";
-import Timeline from "components/frontend/Timeline/Timeline.js";
-import Card from "components/frontend/Card/Card.js";
-import CardBody from "components/frontend/Card/CardBody.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Heading from "components/backend/Heading/Heading.js";
+import Timeline from "components/backend/Timeline/Timeline.js";
+import Card from "components/backend/Card/Card.js";
+import CardBody from "components/backend/Card/CardBody.js";
 
-import { stories } from "variables/general.js";
+import { stories } from "data/general.js";
 
 export default function TimelinePage() {
   return (

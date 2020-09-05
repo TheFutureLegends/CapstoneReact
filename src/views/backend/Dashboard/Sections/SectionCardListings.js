@@ -10,15 +10,15 @@ import Place from "@material-ui/icons/Place";
 import ArtTrack from "@material-ui/icons/ArtTrack";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Button from "components/frontend/CustomButtons/Button.js";
-import Card from "components/frontend/Card/Card.js";
-import CardHeader from "components/frontend/Card/CardHeader.js";
-import CardBody from "components/frontend/Card/CardBody.js";
-import CardFooter from "components/frontend/Card/CardFooter.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Button from "components/backend/CustomButtons/Button.js";
+import Card from "components/backend/Card/Card.js";
+import CardHeader from "components/backend/Card/CardHeader.js";
+import CardBody from "components/backend/Card/CardBody.js";
+import CardFooter from "components/backend/Card/CardFooter.js";
 
-import styles from "assets/jss/material-dashboard-pro-react/views/dashboardStyle.js";
+import styles from "assets/jss/backend/views/dashboardStyle.js";
 
 import priceImage1 from "assets/img/card-2.jpeg";
 import priceImage2 from "assets/img/card-3.jpeg";

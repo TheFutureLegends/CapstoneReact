@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from "react-router";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 
 import "assets/scss/material-kit-pro-react.scss?v=1.9.0";
+import "assets/scss/material-dashboard-pro-react.scss?v=1.9.0";
 
 // pages for this product
 import AboutUsPage from "views/frontend/AboutUsPage/AboutUsPage.js";
@@ -12,6 +13,10 @@ import BlogPostsPage from "views/frontend/BlogPostsPage/BlogPostsPage.js";
 import ContactUsPage from "views/frontend/ContactUsPage/ContactUsPage.js";
 import LoginPage from "views/frontend/LoginPage/LoginPage.js";
 import SectionsPage from "views/frontend/SectionsPage/SectionsPage.js";
+
+import AuthLayout from "layouts/Auth.js";
+import RtlLayout from "layouts/RTL.js";
+import AdminLayout from "layouts/Admin.js";
 // import ComponentsPage from "views/ComponentsPage/ComponentsPage.js";
 // import EcommercePage from "views/EcommercePage/EcommercePage.js";
 // import LandingPage from "views/LandingPage/LandingPage.js";
@@ -50,6 +55,12 @@ ReactDOM.render(
       <Route path="/login" component={LoginPage} />
       <Route path="/about-us" component={AboutUsPage} />
       <Route path="/contact-us" component={ContactUsPage} />
+
+      {/* Official Backend URL */}
+      <Route path="/rtl" component={RtlLayout} />
+      <Route path="/auth" component={AuthLayout} />
+      <Route path="/admin" component={AdminLayout} />
+      <Redirect from="/admin" to="/admin/dashboard" />
     </Switch>
   </Router>,
   document.getElementById("root")

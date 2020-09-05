@@ -6,15 +6,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import Assignment from "@material-ui/icons/Assignment";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Table from "components/frontend/Table/Table.js";
-import Card from "components/frontend/Card/Card.js";
-import CardHeader from "components/frontend/Card/CardHeader.js";
-import CardIcon from "components/frontend/Card/CardIcon.js";
-import CardBody from "components/frontend/Card/CardBody.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Table from "components/backend/Table/Table.js";
+import Card from "components/backend/Card/Card.js";
+import CardHeader from "components/backend/Card/CardHeader.js";
+import CardIcon from "components/backend/Card/CardIcon.js";
+import CardBody from "components/backend/Card/CardBody.js";
 
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import { cardTitle } from "assets/jss/backend.js";
 
 const styles = {
   customCardContentClass: {

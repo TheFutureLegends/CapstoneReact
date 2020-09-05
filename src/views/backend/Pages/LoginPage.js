@@ -11,16 +11,16 @@ import Email from "@material-ui/icons/Email";
 // import LockOutline from "@material-ui/icons/LockOutline";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import CustomInput from "components/frontend/CustomInput/CustomInput.js";
-import Button from "components/frontend/CustomButtons/Button.js";
-import Card from "components/frontend/Card/Card.js";
-import CardBody from "components/frontend/Card/CardBody.js";
-import CardHeader from "components/frontend/Card/CardHeader.js";
-import CardFooter from "components/frontend/Card/CardFooter.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import CustomInput from "components/backend/CustomInput/CustomInput.js";
+import Button from "components/backend/CustomButtons/Button.js";
+import Card from "components/backend/Card/Card.js";
+import CardBody from "components/backend/Card/CardBody.js";
+import CardHeader from "components/backend/Card/CardHeader.js";
+import CardFooter from "components/backend/Card/CardFooter.js";
 
-import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
+import styles from "assets/jss/backend/views/loginPageStyle.js";
 
 const useStyles = makeStyles(styles);
 

@@ -1,9 +1,9 @@
 import React from "react";
 
 // core components
-import Wizard from "components/frontend/Wizard/Wizard.js";
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
+import Wizard from "components/backend/Wizard/Wizard.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
 
 import Step1 from "./WizardSteps/Step1.js";
 import Step2 from "./WizardSteps/Step2.js";

@@ -17,21 +17,21 @@ import Refresh from "@material-ui/icons/Refresh";
 import Edit from "@material-ui/icons/Edit";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Button from "components/frontend/CustomButtons/Button.js";
-import Card from "components/frontend/Card/Card.js";
-import CardHeader from "components/frontend/Card/CardHeader.js";
-import CardBody from "components/frontend/Card/CardBody.js";
-import CardFooter from "components/frontend/Card/CardFooter.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Button from "components/backend/CustomButtons/Button.js";
+import Card from "components/backend/Card/Card.js";
+import CardHeader from "components/backend/Card/CardHeader.js";
+import CardBody from "components/backend/Card/CardBody.js";
+import CardFooter from "components/backend/Card/CardFooter.js";
 
 import {
   dailySalesChart,
   emailsSubscriptionChart,
   completedTasksChart,
-} from "variables/charts";
+} from "data/charts";
 
-import styles from "assets/jss/material-dashboard-pro-react/views/dashboardStyle.js";
+import styles from "assets/jss/backend/views/dashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 

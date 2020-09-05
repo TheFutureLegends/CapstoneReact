@@ -4,10 +4,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
 
-import styles from "assets/jss/material-dashboard-pro-react/views/errorPageStyles.js";
+import styles from "assets/jss/backend/views/errorPageStyles.js";
 
 const useStyles = makeStyles(styles);
 

@@ -4,16 +4,16 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // core components
-import Quote from "components/frontend/Typography/Quote.js";
-import Muted from "components/frontend/Typography/Muted.js";
-import Primary from "components/frontend/Typography/Primary.js";
-import Info from "components/frontend/Typography/Info.js";
-import Success from "components/frontend/Typography/Success.js";
-import Warning from "components/frontend/Typography/Warning.js";
-import Danger from "components/frontend/Typography/Danger.js";
-import Heading from "components/frontend/Heading/Heading.js";
-import Card from "components/frontend/Card/Card.js";
-import CardBody from "components/frontend/Card/CardBody.js";
+import Quote from "components/backend/Typography/Quote.js";
+import Muted from "components/backend/Typography/Muted.js";
+import Primary from "components/backend/Typography/Primary.js";
+import Info from "components/backend/Typography/Info.js";
+import Success from "components/backend/Typography/Success.js";
+import Warning from "components/backend/Typography/Warning.js";
+import Danger from "components/backend/Typography/Danger.js";
+import Heading from "components/backend/Heading/Heading.js";
+import Card from "components/backend/Card/Card.js";
+import CardBody from "components/backend/Card/CardBody.js";
 
 const styles = {
   typo: {

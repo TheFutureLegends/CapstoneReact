@@ -13,17 +13,17 @@ import AddAlert from "@material-ui/icons/AddAlert";
 import Close from "@material-ui/icons/Close";
 
 // core components
-import Heading from "components/frontend/Heading/Heading.js";
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import SnackbarContent from "components/frontend/Snackbar/SnackbarContent.js";
-import Button from "components/frontend/CustomButtons/Button.js";
-import Snackbar from "components/frontend/Snackbar/Snackbar.js";
-import Instruction from "components/frontend/Instruction/Instruction.js";
-import Card from "components/frontend/Card/Card.js";
-import CardBody from "components/frontend/Card/CardBody.js";
+import Heading from "components/backend/Heading/Heading.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import SnackbarContent from "components/backend/Snackbar/SnackbarContent.js";
+import Button from "components/backend/CustomButtons/Button.js";
+import Snackbar from "components/backend/Snackbar/Snackbar.js";
+import Instruction from "components/backend/Instruction/Instruction.js";
+import Card from "components/backend/Card/Card.js";
+import CardBody from "components/backend/Card/CardBody.js";
 
-import styles from "assets/jss/material-dashboard-pro-react/views/notificationsStyle.js";
+import styles from "assets/jss/backend/views/notificationsStyle.js";
 
 import noticeModal1 from "assets/img/card-1.jpeg";
 import noticeModal2 from "assets/img/card-2.jpeg";

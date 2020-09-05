@@ -11,15 +11,15 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import { makeStyles } from "@material-ui/core/styles";
 
 // core components
-import Heading from "components/frontend/Heading/Heading.js";
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Card from "components/frontend/Card/Card.js";
-import CardBody from "components/frontend/Card/CardBody.js";
+import Heading from "components/backend/Heading/Heading.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Card from "components/backend/Card/Card.js";
+import CardBody from "components/backend/Card/CardBody.js";
 
-import styles from "assets/jss/material-dashboard-pro-react/components/buttonStyle.js";
+import styles from "assets/jss/backend/components/buttonStyle.js";
 
-import { events as calendarEvents } from "variables/general.js";
+import { events as calendarEvents } from "data/general.js";
 
 const localizer = momentLocalizer(moment);
 

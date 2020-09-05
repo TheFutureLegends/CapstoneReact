@@ -15,14 +15,14 @@ import AddLocation from "@material-ui/icons/AddLocation";
 import Place from "@material-ui/icons/Place";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Card from "components/frontend/Card/Card.js";
-import CardBody from "components/frontend/Card/CardBody.js";
-import CardIcon from "components/frontend/Card/CardIcon.js";
-import CardHeader from "components/frontend/Card/CardHeader.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Card from "components/backend/Card/Card.js";
+import CardBody from "components/backend/Card/CardBody.js";
+import CardIcon from "components/backend/Card/CardIcon.js";
+import CardHeader from "components/backend/Card/CardHeader.js";
 
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import { cardTitle } from "assets/jss/backend.js";
 
 const styles = {
   cardIconTitle: {

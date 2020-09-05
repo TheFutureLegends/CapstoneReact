@@ -14,16 +14,16 @@ import LocalOffer from "@material-ui/icons/LocalOffer";
 import Update from "@material-ui/icons/Update";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Danger from "components/frontend/Typography/Danger.js";
-import Card from "components/frontend/Card/Card.js";
-import CardHeader from "components/frontend/Card/CardHeader.js";
-import CardIcon from "components/frontend/Card/CardIcon.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Danger from "components/backend/Typography/Danger.js";
+import Card from "components/backend/Card/Card.js";
+import CardHeader from "components/backend/Card/CardHeader.js";
+import CardIcon from "components/backend/Card/CardIcon.js";
 
-import CardFooter from "components/frontend/Card/CardFooter.js";
+import CardFooter from "components/backend/Card/CardFooter.js";
 
-import styles from "assets/jss/material-dashboard-pro-react/views/dashboardStyle.js";
+import styles from "assets/jss/backend/views/dashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 

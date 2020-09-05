@@ -11,15 +11,15 @@ import Gavel from "@material-ui/icons/Gavel";
 import HelpOutline from "@material-ui/icons/HelpOutline";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import NavPills from "components/frontend/NavPills/NavPills.js";
-import Accordion from "components/frontend/Accordion/Accordion.js";
-import Card from "components/frontend/Card/Card.js";
-import CardHeader from "components/frontend/Card/CardHeader.js";
-import CardBody from "components/frontend/Card/CardBody.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import NavPills from "components/backend/NavPills/NavPills.js";
+import Accordion from "components/backend/Accordion/Accordion.js";
+import Card from "components/backend/Card/Card.js";
+import CardHeader from "components/backend/Card/CardHeader.js";
+import CardBody from "components/backend/Card/CardBody.js";
 
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
+import { cardTitle } from "assets/jss/backend.js";
 
 const styles = {
   cardTitle,

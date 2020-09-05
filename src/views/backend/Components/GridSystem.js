@@ -4,12 +4,12 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Card from "components/frontend/Card/Card.js";
-import CardBody from "components/frontend/Card/CardBody.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Card from "components/backend/Card/Card.js";
+import CardBody from "components/backend/Card/CardBody.js";
 
-import styles from "assets/jss/material-dashboard-pro-react/views/gridSystemStyle.js";
+import styles from "assets/jss/backend/views/gridSystemStyle.js";
 
 const useStyles = makeStyles(styles);
 

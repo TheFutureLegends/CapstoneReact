@@ -13,14 +13,14 @@ import Close from "@material-ui/icons/Close";
 import Favorite from "@material-ui/icons/Favorite";
 
 // core components
-import GridContainer from "components/frontend/Grid/GridContainer.js";
-import GridItem from "components/frontend/Grid/GridItem.js";
-import Pagination from "components/frontend/Pagination/Pagination.js";
-import Button from "components/frontend/CustomButtons/Button.js";
-import Card from "components/frontend/Card/Card.js";
-import CardBody from "components/frontend/Card/CardBody.js";
+import GridContainer from "components/backend/Grid/GridContainer.js";
+import GridItem from "components/backend/Grid/GridItem.js";
+import Pagination from "components/backend/Pagination/Pagination.js";
+import Button from "components/backend/CustomButtons/Button.js";
+import Card from "components/backend/Card/Card.js";
+import CardBody from "components/backend/Card/CardBody.js";
 
-import styles from "assets/jss/material-dashboard-pro-react/views/buttonsStyle.js";
+import styles from "assets/jss/backend/views/buttonsStyle.js";
 
 const useStyles = makeStyles(styles);
 

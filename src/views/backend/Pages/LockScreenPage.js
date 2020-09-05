@@ -4,16 +4,16 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // core components
-import Button from "components/frontend/CustomButtons/Button.js";
-import CustomInput from "components/frontend/CustomInput/CustomInput.js";
-import Card from "components/frontend/Card/Card.js";
-import CardBody from "components/frontend/Card/CardBody.js";
-import CardAvatar from "components/frontend/Card/CardAvatar.js";
-import CardFooter from "components/frontend/Card/CardFooter.js";
+import Button from "components/backend/CustomButtons/Button.js";
+import CustomInput from "components/backend/CustomInput/CustomInput.js";
+import Card from "components/backend/Card/Card.js";
+import CardBody from "components/backend/Card/CardBody.js";
+import CardAvatar from "components/backend/Card/CardAvatar.js";
+import CardFooter from "components/backend/Card/CardFooter.js";
 
 import avatar from "assets/img/faces/avatar.jpg";
 
-import styles from "assets/jss/material-dashboard-pro-react/views/lockScreenPageStyle.js";
+import styles from "assets/jss/backend/views/lockScreenPageStyle.js";
 
 const useStyles = makeStyles(styles);
 
