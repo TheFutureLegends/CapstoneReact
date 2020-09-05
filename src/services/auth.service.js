@@ -24,12 +24,12 @@ const login = (username, password) => {
     });
 };
 
-const logout = () => {
+const Logout = () => {
   localStorage.removeItem("user");
 };
 
 export default {
   checkLoggedIn,
   login,
-  logout,
+  Logout,
 };

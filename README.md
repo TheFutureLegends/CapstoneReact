@@ -94,7 +94,7 @@ material-kit-pro
     │   │   ├── loading-bubbles.svg
     │   │   └── sections
     │   ├── jss
-    │   │   ├── material-kit-pro-react
+    │   │   ├── frontend
     │   │   │   ├── components
     │   │   │   └── views
     │   │   │       ├── aboutUsSections
@@ -106,7 +106,7 @@ material-kit-pro
     │   │   │       ├── presentationSections
     │   │   │       ├── pricingSections
     │   │   │       ├── sectionsSections
-    │   │   └── material-kit-pro-react.js
+    │   │   └── frontend.js
     │   └── scss
     │       ├── core
     │       │   ├── mixins
@@ -177,97 +177,50 @@ material-kit-pro
     ├── index.js
     ├── logo.svg
     └── views
-        ├── AboutUsPage
-        │   ├── AboutUsPage.js
-        │   └── Sections
-        │       ├── SectionContact.js
-        │       ├── SectionDescription.js
-        │       ├── SectionOffice.js
-        │       ├── SectionServices.js
-        │       └── SectionTeam.js
-        ├── BlogPostPage
-        │   ├── BlogPostPage.js
-        │   └── Sections
-        │       ├── SectionBlogInfo.js
-        │       ├── SectionComments.js
-        │       ├── SectionSimilarStories.js
-        │       └── SectionText.js
-        ├── BlogPostsPage
-        │   ├── BlogPostsPage.js
-        │   └── Sections
-        │       ├── SectionImage.js
-        │       ├── SectionInterested.js
-        │       ├── SectionPills.js
-        │       └── SubscribeLine.js
-        ├── ComponentsPage
-        │   ├── ComponentsPage.js
-        │   └── Sections
-        │       ├── SectionBasics.js
-        │       ├── SectionCards.js
-        │       ├── SectionCarousel.js
-        │       ├── SectionContentAreas.js
-        │       ├── SectionFooter.js
-        │       ├── SectionJavascript.js
-        │       ├── SectionNavbars.js
-        │       ├── SectionNotifications.js
-        │       ├── SectionPills.js
-        │       ├── SectionPreFooter.js
-        │       ├── SectionTabs.js
-        │       └── SectionTypography.js
-        ├── ContactUsPage
-        │   └── ContactUsPage.js
-        ├── EcommercePage
-        │   ├── EcommercePage.js
-        │   └── Sections
-        │       ├── SectionBlog.js
-        │       ├── SectionLatestOffers.js
-        │       └── SectionProducts.js
-        ├── ErrorPage
-        │   └── ErrorPage.js
-        ├── LandingPage
-        │   ├── LandingPage.js
-        │   └── Sections
-        │       ├── SectionProduct.js
-        │       ├── SectionTeam.js
-        │       └── SectionWork.js
-        ├── LoginPage
-        │   └── LoginPage.js
-        ├── PresentationPage
-        │   ├── PresentationPage.js
-        │   └── Sections
-        │       ├── SectionCards.js
-        │       ├── SectionComponents.js
-        │       ├── SectionContent.js
-        │       ├── SectionDescription.js
-        │       ├── SectionExamples.js
-        │       ├── SectionFreeDemo.js
-        │       ├── SectionOverview.js
-        │       ├── SectionPricing.js
-        │       └── SectionSections.js
-        ├── PricingPage
-        │   ├── PricingPage.js
-        │   └── Sections
-        │       ├── SectionFeatures.js
-        │       └── SectionPricing.js
-        ├── ProductPage
-        │   └── ProductPage.js
-        ├── ProfilePage
-        │   └── ProfilePage.js
-        ├── SectionsPage
-        │   ├── Sections
-        │   │   ├── SectionBlogs.js
-        │   │   ├── SectionContacts.js
-        │   │   ├── SectionFeatures.js
-        │   │   ├── SectionHeaders.js
-        │   │   ├── SectionPricing.js
-        │   │   ├── SectionProjects.js
-        │   │   ├── SectionTeams.js
-        │   │   └── SectionTestimonials.js
-        │   └── SectionsPage.js
-        ├── ShoppingCartPage
-        │   └── ShoppingCartPage.js
-        └── SignupPage
-            └── SignupPage.js
+        └── frontend
+            ├── AboutUsPage
+            │   ├── AboutUsPage.js
+            │   └── Sections
+            │       ├── SectionContact.js
+            │       ├── SectionDescription.js
+            │       ├── SectionOffice.js
+            │       ├── SectionServices.js
+            │       └── SectionTeam.js
+            ├── BlogPostPage
+            │   ├── BlogPostPage.js
+            │   └── Sections
+            │       ├── SectionBlogInfo.js
+            │       ├── SectionComments.js
+            │       ├── SectionSimilarStories.js
+            │       └── SectionText.js
+            ├── BlogPostsPage
+            │   ├── BlogPostsPage.js
+            │   └── Sections
+            │       ├── SectionImage.js
+            │       ├── SectionInterested.js
+            │       ├── SectionPills.js
+            │       └── SubscribeLine.js
+            ├── ContactUsPage
+            │   └── ContactUsPage.js
+            ├── ErrorPage
+            │   └── ErrorPage.js
+            ├── LoginPage
+            │   └── LoginPage.js
+            ├── ProfilePage
+            │   └── ProfilePage.js
+            ├── SectionsPage
+            │   ├── Sections
+            │   │   ├── SectionBlogs.js
+            │   │   ├── SectionContacts.js
+            │   │   ├── SectionFeatures.js
+            │   │   ├── SectionHeaders.js
+            │   │   ├── SectionPricing.js
+            │   │   ├── SectionProjects.js
+            │   │   ├── SectionTeams.js
+            │   │   └── SectionTestimonials.js
+            │   └── SectionsPage.js
+            └── SignupPage
+                └── SignupPage.js
 ```
 
 
