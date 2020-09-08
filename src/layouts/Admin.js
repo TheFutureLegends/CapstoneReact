@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, createRef } from "react";
 import cx from "classnames";
 import { Switch, Route, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
@@ -17,6 +17,9 @@ import FixedPlugin from "components/backend/FixedPlugin/FixedPlugin.js";
 import routes from "routes.js";
 
 import styles from "assets/jss/backend/layouts/adminStyle.js";
+// import AuthService from "services/auth.service";
+// import Context from "utils/context";
+// import { isEmpty } from "utils/functions.js";
 
 // import "assets/scss/material-dashboard-pro-react.scss?v=1.9.0";
 
@@ -26,16 +29,25 @@ const useStyles = makeStyles(styles);
 
 export default function Dashboard(props) {
   const { ...rest } = props;
+
   // states and functions
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [miniActive, setMiniActive] = React.useState(false);
-  const [image, setImage] = React.useState(require("assets/img/sidebar-2.jpg"));
-  const [color, setColor] = React.useState("blue");
-  const [bgColor, setBgColor] = React.useState("black");
-  // const [hasImage, setHasImage] = React.useState(true);
-  const [fixedClasses, setFixedClasses] = React.useState("dropdown");
-  const [logo, setLogo] = React.useState(require("assets/img/logo-white.svg"));
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const [miniActive, setMiniActive] = useState(false);
+
+  const [image, setImage] = useState(require("assets/img/sidebar-2.jpg"));
+
+  const [color, setColor] = useState("blue");
+
+  const [bgColor, setBgColor] = useState("black");
+
+  // const [hasImage, setHasImage] = useState(true);
+
+  const [fixedClasses, setFixedClasses] = useState("dropdown");
+
+  const [logo, setLogo] = useState(require("assets/img/logo-white.svg"));
   // styles
+
   const classes = useStyles();
   const mainPanelClasses =
     classes.mainPanel +
@@ -46,9 +58,10 @@ export default function Dashboard(props) {
         navigator.platform.indexOf("Win") > -1,
     });
   // ref for main panel div
-  const mainPanel = React.createRef();
+  const mainPanel = createRef();
+
   // effect instead of componentDidMount, componentDidUpdate and componentWillUnmount
-  React.useEffect(() => {
+  useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -59,13 +72,15 @@ export default function Dashboard(props) {
     window.addEventListener("resize", resizeFunction);
 
     // Specify how to clean up after this effect:
-    return function cleanup() {
+    return () => {
       if (navigator.platform.indexOf("Win") > -1) {
         ps.destroy();
       }
       window.removeEventListener("resize", resizeFunction);
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // functions for changeing the states from components
   const handleImageClick = (image) => {
     setImage(image);

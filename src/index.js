@@ -14,8 +14,8 @@ import ContactUsPage from "views/frontend/ContactUsPage/ContactUsPage.js";
 import LoginPage from "views/frontend/LoginPage/LoginPage.js";
 import SectionsPage from "views/frontend/SectionsPage/SectionsPage.js";
 
-import AuthLayout from "layouts/Auth.js";
-import RtlLayout from "layouts/RTL.js";
+// import AuthLayout from "layouts/Auth.js";
+// import RtlLayout from "layouts/RTL.js";
 import AdminLayout from "layouts/Admin.js";
 // import ComponentsPage from "views/ComponentsPage/ComponentsPage.js";
 // import EcommercePage from "views/EcommercePage/EcommercePage.js";
@@ -28,40 +28,35 @@ import AdminLayout from "layouts/Admin.js";
 // import ErrorPage from "views/ErrorPage/ErrorPage.js";
 // import PresentationPage from "views/PresentationPage/PresentationPage.js";
 
+import UserContextProvider from "store/contexts/UserContextProvider";
+
 var hist = createBrowserHistory();
 
-ReactDOM.render(
-  <Router history={hist}>
-    <Switch>
-      {/* <Route path="/blog-post" component={BlogPostPage} /> */}
-      {/* <Route path="/blog-posts" component={BlogPostsPage} /> */}
-      {/* <Route path="/components" component={ComponentsPage} /> */}
+const rootElement = document.getElementById("root");
 
-      {/* <Route path="/ecommerce-page" component={EcommercePage} /> */}
-      {/* <Route path="/landing-page" component={LandingPage} /> */}
+const App = () => {
+  return (
+    <Router history={hist}>
+      <Switch>
+        {/* Official Frontend URL */}
+        <Route exact path="/" component={SectionsPage} />
+        <Route exact path="/study-guides" component={BlogPostsPage} />
+        <Route path="/study-guide/:slug" component={BlogPostPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/about-us" component={AboutUsPage} />
+        <Route path="/contact-us" component={ContactUsPage} />
 
-      {/* <Route path="/pricing" component={PricingPage} /> */}
-      {/* <Route path="/profile-page" component={ProfilePage} /> */}
-      {/* <Route path="/product-page" component={ProductPage} /> */}
-      {/* <Route path="/sections" component={SectionsPage} /> */}
-      {/* <Route path="/shopping-cart-page" component={ShoppingCartPage} /> */}
-      {/* <Route path="/signup-page" component={SignupPage} /> */}
-      {/* <Route path="/error-page" component={ErrorPage} /> */}
+        {/* Official Backend URL */}
+        {/* <Route path="/rtl" component={RtlLayout} />
+        <Route path="/auth" component={AuthLayout} /> */}
+        <UserContextProvider>
+          <Route path="/admin" component={AdminLayout} />
+        </UserContextProvider>
+        
+        <Redirect from="/admin" to="/admin/dashboard" />
+      </Switch>
+    </Router>
+  );
+};
 
-      {/* Official Frontend URL */}
-      <Route exact path="/" component={SectionsPage} />
-      <Route exact path="/study-guides" component={BlogPostsPage} />
-      <Route path="/study-guide/:slug" component={BlogPostPage} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/about-us" component={AboutUsPage} />
-      <Route path="/contact-us" component={ContactUsPage} />
-
-      {/* Official Backend URL */}
-      <Route path="/rtl" component={RtlLayout} />
-      <Route path="/auth" component={AuthLayout} />
-      <Route path="/admin" component={AdminLayout} />
-      <Redirect from="/admin" to="/admin/dashboard" />
-    </Switch>
-  </Router>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, rootElement);

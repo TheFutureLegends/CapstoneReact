@@ -29,7 +29,9 @@ import blogPostPageStyle from "assets/jss/frontend/views/blogPostPageStyle.js";
 
 import NavBar from "views/frontend/_partials/NavBar";
 import FooterBar from "views/frontend/_partials/FooterBar.js";
-import { baseApiUrl, nytime_api } from "services/Api.js";
+
+import { baseApiUrl } from "services/Api.js";
+import { nytime_api } from "key.js";
 
 const useStyles = makeStyles(blogPostPageStyle);
 
@@ -46,7 +48,7 @@ const BlogPostPage = (props) => {
         `https://api.nytimes.com/svc/topstories/v2/world.json?api-key=${nytime_api}`
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
       });
     axios.get(baseApiUrl + "/post/" + props.match.params.slug).then((res) => {
       setBlogPost({

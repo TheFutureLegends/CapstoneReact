@@ -6,7 +6,7 @@ import SectionVectorMap from "./Sections/SectionVectorMap.js";
 import SectionCardCharts from "./Sections/SectionCardCharts.js";
 import SectionCardListings from "./Sections/SectionCardListings.js";
 
-export default function Dashboard() {
+const Dashboard = () => {
   return (
     <div>
       {/* Card Stats BEGIN */}
@@ -27,4 +27,6 @@ export default function Dashboard() {
       {/* Card Listing END */}
     </div>
   );
-}
+};
+
+export default Dashboard;

@@ -30,6 +30,7 @@ const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const [openNotification, setOpenNotification] = React.useState(null);
+
   const handleClickNotification = (event) => {
     if (openNotification && openNotification.contains(event.target)) {
       setOpenNotification(null);
@@ -37,10 +38,13 @@ export default function HeaderLinks(props) {
       setOpenNotification(event.currentTarget);
     }
   };
+
   const handleCloseNotification = () => {
     setOpenNotification(null);
   };
+
   const [openProfile, setOpenProfile] = React.useState(null);
+
   const handleClickProfile = (event) => {
     if (openProfile && openProfile.contains(event.target)) {
       setOpenProfile(null);
@@ -48,11 +52,15 @@ export default function HeaderLinks(props) {
       setOpenProfile(event.currentTarget);
     }
   };
+
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
+
   const classes = useStyles();
+
   const { rtlActive } = props;
+
   const searchButton =
     classes.top +
     " " +
@@ -61,15 +69,19 @@ export default function HeaderLinks(props) {
     classNames({
       [classes.searchRTL]: rtlActive,
     });
+
   const dropdownItem = classNames(classes.dropdownItem, classes.primaryHover, {
     [classes.dropdownItemRTL]: rtlActive,
   });
+
   const wrapper = classNames({
     [classes.wrapperRTL]: rtlActive,
   });
+
   const managerClasses = classNames({
     [classes.managerClasses]: true,
   });
+
   return (
     <div className={wrapper}>
       <CustomInput

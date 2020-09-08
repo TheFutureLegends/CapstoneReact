@@ -24,11 +24,13 @@ import {
   getRandomInt,
 } from "views/frontend/_partials/Miscellaneous.js";
 
-import { baseApiUrl, news_api } from "services/Api.js";
+import { baseApiUrl } from "services/Api.js";
+
+import { news_api } from "key.js";
 
 import { useInfiniteScroll } from "views/frontend/_partials/useInfiniteScroll.js";
 
-import authHeader from "services/auth-header.js";
+import AuthHeader from "services/auth.header";
 
 // import CardAvatar from "components/frontend/Card/CardAvatar.js";
 // import Info from "components/frontend/Typography/Info.js";
@@ -247,13 +249,13 @@ const SectionCards = () => {
               content: result.content,
               urlToImage: result.urlToImage,
               visit: getRandomInt(100, 10000000),
-              author_id: getRandomInt(1, 100),
+              author_id: 1,
             });
 
-            if (authHeader()) {
+            if (AuthHeader.authHeader()) {
               axios
                 .post(baseApiUrl + "/post/store", json, {
-                  headers: authHeader(),
+                  headers: AuthHeader.authHeader(),
                 })
                 .then((res) => {})
                 .catch((error) => {

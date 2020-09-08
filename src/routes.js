@@ -38,6 +38,9 @@ import Place from "@material-ui/icons/Place";
 import Timeline from "@material-ui/icons/Timeline";
 import WidgetsIcon from "@material-ui/icons/Widgets";
 
+// Dashboard
+import CreateForm from "views/backend/Posts/CreateForm.js";
+
 var dashRoutes = [
   {
     path: "/dashboard",
@@ -260,6 +263,15 @@ var dashRoutes = [
         mini: "W",
         rtlMini: "ث",
         component: Wizard,
+        layout: "/admin",
+      },
+      {
+        path: "/post-create-forms",
+        name: "Post Create Forms",
+        rtlName: "أشكال عادية",
+        mini: "RF",
+        rtlMini: "صو",
+        component: CreateForm,
         layout: "/admin",
       },
     ],

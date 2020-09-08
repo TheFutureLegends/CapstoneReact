@@ -29,6 +29,7 @@ const SectionText = (props) => {
   const { ...rest } = props;
 
   useEffect(() => {
+    // console.log(converter.convert(div));
     return () => {
       // setState(false);
     };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -18,69 +18,42 @@ const useStyles = makeStyles(headersStyle);
 const navbarStyles = makeStyles(navbarsStyle);
 
 const NavBar = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [isLoggedIn, setIsLoggedIn] = AuthService.CheckAuthenticatedUser();
+
+  const [authenticatedUser, setAuthenticatedUser] = useState({
+    username: "",
+    email: "",
+  });
+
   const classes = useStyles();
+
   const navbarClasses = navbarStyles();
 
-  // let history = useHistory();
-
   function handleLogout() {
-    AuthService.Logout();
-
-    // history.push("/");
+    AuthService.logout();
 
     window.location.reload();
   }
 
-  // function handleAccountProfileClick() {
-  //   console.log("Account Profile Clicked");
-  // }
-
-  // function handleSettingClick() {
-  //   console.log("Settings Clicked");
-  // }
-
-  function checkLoggedIn() {
-    if (AuthService.checkLoggedIn()) {
-      return (
-        <ListItem className={classes.listItem}>
-          <CustomDropdown
-            left
-            caret={true}
-            hoverColor="dark"
-            buttonText={
-              <img
-                src={profileImage}
-                className={navbarClasses.img}
-                alt="profile"
-              />
-            }
-            buttonProps={{
-              className:
-                navbarClasses.navLink + " " + navbarClasses.imageDropdownButton,
-              color: "transparent",
-            }}
-            dropdownList={[
-              "Account Profile",
-              "Settings and other stuff",
-              { divider: true },
-              // <Button href="/study-guides">Showcase</Button>,
-              <a onClick={() => handleLogout()}>Sign out</a>,
-            ]}
-          />
-        </ListItem>
-      );
+  function fetchAuthenticatedUser() {
+    if (isLoggedIn) {
+      AuthService.getCurrentAuthenticatedUsername().then((response) => {
+        setAuthenticatedUser({
+          username: response.username,
+          email: response.email,
+        });
+      });
     }
-
-    return (
-      <ListItem className={classes.listItem}>
-        <Button href="/login" className={classes.navLink} color="transparent">
-          Login
-        </Button>
-      </ListItem>
-    );
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchAuthenticatedUser();
+    return () => {
+      fetchAuthenticatedUser();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
 
   return (
     <Header
@@ -134,7 +107,48 @@ const NavBar = () => {
               Contact us
             </Button>
           </ListItem>
-          {checkLoggedIn()}
+          {/* {getAuthUser()} */}
+          {isLoggedIn ? (
+            <ListItem className={classes.listItem}>
+              <CustomDropdown
+                left
+                caret={true}
+                dropdownHeader={authenticatedUser.username}
+                hoverColor="dark"
+                buttonText={
+                  <img
+                    src={profileImage}
+                    className={navbarClasses.img}
+                    alt="profile"
+                  />
+                }
+                buttonProps={{
+                  className:
+                    navbarClasses.navLink +
+                    " " +
+                    navbarClasses.imageDropdownButton,
+                  color: "transparent",
+                }}
+                dropdownList={[
+                  <a href="/admin/dashboard">Dashboard</a>,
+                  "Settings and other stuff",
+                  { divider: true },
+                  // <Button href="/study-guides">Showcase</Button>,
+                  <a onClick={() => handleLogout()}>Sign out</a>,
+                ]}
+              />
+            </ListItem>
+          ) : (
+            <ListItem className={classes.listItem}>
+              <Button
+                href="/login"
+                className={classes.navLink}
+                color="transparent"
+              >
+                Login
+              </Button>
+            </ListItem>
+          )}
         </List>
       }
     />
