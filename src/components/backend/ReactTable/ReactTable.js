@@ -134,8 +134,9 @@ function Table({ columns, data }) {
   let pageSelectData = Array.apply(
     null,
     Array(pageOptions.length)
-  ).map(function () {});
-  let numberOfRowsData = [5, 10, 20, 25, 50, 100];
+  ).map(function () { });
+  
+  let numberOfRowsData = [5, 10, 20, 25, 50, 200];
   return (
     <>
       <div className="ReactTable -striped -highlight">
@@ -177,6 +178,7 @@ function Table({ columns, data }) {
                       inputProps={{
                         name: "pageSelect",
                         id: "page-select",
+                        className: "page-select",
                       }}
                     >
                       {pageSelectData.map((prop, key) => {

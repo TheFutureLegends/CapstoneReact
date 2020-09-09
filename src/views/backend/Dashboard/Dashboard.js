@@ -20,7 +20,7 @@ const Dashboard = () => {
       {/* Card Chart BEGIN */}
       <SectionCardCharts></SectionCardCharts>
       {/* Card Chart END */}
-      <h3>Manage Listings</h3>
+      <h3>Latest Post</h3>
       <br />
       {/* Card Listing START */}
       <SectionCardListings></SectionCardListings>

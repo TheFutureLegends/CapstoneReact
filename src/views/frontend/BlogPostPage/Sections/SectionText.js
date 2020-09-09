@@ -6,12 +6,12 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import GridContainer from "components/frontend/Grid/GridContainer.js";
 import GridItem from "components/frontend/Grid/GridItem.js";
-import Quote from "components/frontend/Typography/Quote.js";
-// core components
+// import Quote from "components/frontend/Typography/Quote.js";
+// // core components
 
-import blog4 from "assets/img/examples/blog4.jpg";
-import blog3 from "assets/img/examples/blog3.jpg";
-import blog1 from "assets/img/examples/blog1.jpg";
+// import blog4 from "assets/img/examples/blog4.jpg";
+// import blog3 from "assets/img/examples/blog3.jpg";
+// import blog1 from "assets/img/examples/blog1.jpg";
 
 import sectionTextStyle from "assets/jss/frontend/views/blogPostSections/sectionTextStyle.js";
 
@@ -20,11 +20,11 @@ const useStyles = makeStyles(sectionTextStyle);
 const SectionText = (props) => {
   const classes = useStyles();
 
-  const imgClasses = classNames(
-    classes.imgRaised,
-    classes.imgRounded,
-    classes.imgFluid
-  );
+  // const imgClasses = classNames(
+  //   classes.imgRaised,
+  //   classes.imgRounded,
+  //   classes.imgFluid
+  // );
 
   const { ...rest } = props;
 
@@ -45,7 +45,7 @@ const SectionText = (props) => {
             __html: rest.description,
           }}
         ></GridItem>
-        <GridItem xs={12} sm={8} md={8}>
+        {/* <GridItem xs={12} sm={8} md={8}>
           <h3 className={classes.title}>
             The Castle Looks Different at Night...
           </h3>
@@ -64,11 +64,11 @@ const SectionText = (props) => {
           </p>
           <Quote
             textClassName={classes.quoteText}
-            text="“And thank you for turning my personal jean jacket into a couture piece.”"
+            text="“And thank you for using my personal jean jacket into a couture piece.”"
             author="Kanye West, Producer."
           />
-        </GridItem>
-        <GridItem xs={12} sm={10} md={10} className={classes.section}>
+        </GridItem> */}
+        {/* <GridItem xs={12} sm={10} md={10} className={classes.section}>
           <GridContainer>
             <GridItem xs={12} sm={4} md={4}>
               <img src={blog4} alt="..." className={imgClasses} />
@@ -80,8 +80,8 @@ const SectionText = (props) => {
               <img src={blog1} alt="..." className={imgClasses} />
             </GridItem>
           </GridContainer>
-        </GridItem>
-        <GridItem xs={12} sm={8} md={8}>
+        </GridItem> */}
+        {/* <GridItem xs={12} sm={8} md={8}>
           <h3 className={classes.title}>Rest of the Story:</h3>
           <p>
             We are here to make life better. And now I look and look around and
@@ -110,7 +110,7 @@ const SectionText = (props) => {
             Pablo the number 1 album in the world! I{"'"}m so proud of the nr #1
             song in the country. Panda! Good music 2016!
           </p>
-        </GridItem>
+        </GridItem> */}
       </GridContainer>
     </div>
   );

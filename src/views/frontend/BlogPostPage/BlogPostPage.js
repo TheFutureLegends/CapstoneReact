@@ -30,7 +30,7 @@ import blogPostPageStyle from "assets/jss/frontend/views/blogPostPageStyle.js";
 import NavBar from "views/frontend/_partials/NavBar";
 import FooterBar from "views/frontend/_partials/FooterBar.js";
 
-import { baseApiUrl } from "services/Api.js";
+import { baseApiUrl } from "services/api.js";
 import { nytime_api } from "key.js";
 
 const useStyles = makeStyles(blogPostPageStyle);

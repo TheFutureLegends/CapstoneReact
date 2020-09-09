@@ -25,7 +25,7 @@ import Typography from "views/backend/Components/Typography.js";
 import UserProfile from "views/backend/Pages/UserProfile.js";
 import ValidationForms from "views/backend/Forms/ValidationForms.js";
 import VectorMap from "views/backend/Maps/VectorMap.js";
-import Widgets from "views/backend/Widgets/Widgets.js";
+// import Widgets from "views/backend/Widgets/Widgets.js";
 import Wizard from "views/backend/Forms/Wizard.js";
 
 // @material-ui/icons
@@ -39,6 +39,7 @@ import Timeline from "@material-ui/icons/Timeline";
 import WidgetsIcon from "@material-ui/icons/Widgets";
 
 // Dashboard
+import Posts from "views/backend/Posts/Posts.js";
 import CreateForm from "views/backend/Posts/CreateForm.js";
 
 var dashRoutes = [
@@ -349,11 +350,11 @@ var dashRoutes = [
     ],
   },
   {
-    path: "/widgets",
-    name: "Widgets",
+    path: "/posts",
+    name: "Posts List",
     rtlName: "الحاجيات",
     icon: WidgetsIcon,
-    component: Widgets,
+    component: Posts,
     layout: "/admin",
   },
   {

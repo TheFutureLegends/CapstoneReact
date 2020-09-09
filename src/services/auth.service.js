@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { authUrl } from "services/Api.js";
+import { authUrl } from "services/api.js";
 import AuthHeader from "services/auth.header";
 
 const CheckAuthenticatedUser = () => {
@@ -99,6 +99,18 @@ const login = (username, password) => {
     });
 };
 
+const register = (username, email, password) => {
+  return axios
+    .post(authUrl + "/users/", {
+      username: username,
+      email: email,
+      password: password,
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
 const logout = () => {
   localStorage.removeItem("user_access");
   localStorage.removeItem("user_refresh");
@@ -120,6 +132,7 @@ export default {
   CheckAuthenticatedUser,
   refreshToken,
   login,
+  register,
   logout,
   getCurrentAuthenticatedUsername,
 };

@@ -12,6 +12,7 @@ import BlogPostPage from "views/frontend/BlogPostPage/BlogPostPage.js";
 import BlogPostsPage from "views/frontend/BlogPostsPage/BlogPostsPage.js";
 import ContactUsPage from "views/frontend/ContactUsPage/ContactUsPage.js";
 import LoginPage from "views/frontend/LoginPage/LoginPage.js";
+import SignupPage from "views/frontend/SignupPage/SignupPage.js";
 import SectionsPage from "views/frontend/SectionsPage/SectionsPage.js";
 
 // import AuthLayout from "layouts/Auth.js";
@@ -42,7 +43,10 @@ const App = () => {
         <Route exact path="/" component={SectionsPage} />
         <Route exact path="/study-guides" component={BlogPostsPage} />
         <Route path="/study-guide/:slug" component={BlogPostPage} />
+        {/* <UserContextProvider> */}
         <Route path="/login" component={LoginPage} />
+        <Route path="/register" component={SignupPage} />
+        {/* </UserContextProvider> */}
         <Route path="/about-us" component={AboutUsPage} />
         <Route path="/contact-us" component={ContactUsPage} />
 
@@ -52,7 +56,7 @@ const App = () => {
         <UserContextProvider>
           <Route path="/admin" component={AdminLayout} />
         </UserContextProvider>
-        
+
         <Redirect from="/admin" to="/admin/dashboard" />
       </Switch>
     </Router>

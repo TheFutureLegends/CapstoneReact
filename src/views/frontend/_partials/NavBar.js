@@ -139,15 +139,26 @@ const NavBar = () => {
               />
             </ListItem>
           ) : (
-            <ListItem className={classes.listItem}>
-              <Button
-                href="/login"
-                className={classes.navLink}
-                color="transparent"
-              >
-                Login
-              </Button>
-            </ListItem>
+            <>
+              <ListItem className={classes.listItem}>
+                <Button
+                  href="/login"
+                  className={classes.navLink}
+                  color="transparent"
+                >
+                  Login
+                </Button>
+              </ListItem>
+              <ListItem className={classes.listItem}>
+                <Button
+                  href="/register"
+                  className={classes.navLink}
+                  color="transparent"
+                >
+                  Register
+                </Button>
+              </ListItem>
+            </>
           )}
         </List>
       }

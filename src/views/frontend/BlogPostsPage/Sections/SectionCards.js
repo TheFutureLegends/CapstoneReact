@@ -24,7 +24,7 @@ import {
   getRandomInt,
 } from "views/frontend/_partials/Miscellaneous.js";
 
-import { baseApiUrl } from "services/Api.js";
+import { baseApiUrl } from "services/api.js";
 
 import { news_api } from "key.js";
 
@@ -298,19 +298,19 @@ const SectionCards = () => {
       setIsFinished(false);
     });
 
-    axios
-      .get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${news_api}`)
-      .then((res) => {
-        seedDatabase(res.data.articles);
-      });
+    // axios
+    //   .get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${news_api}`)
+    //   .then((res) => {
+    //     seedDatabase(res.data.articles);
+    //   });
 
-    axios
-      .get(
-        `https://newsapi.org/v2/everything?q=apple&from=2020-09-01&to=2020-09-01&sortBy=popularity&apiKey=${news_api}`
-      )
-      .then((res) => {
-        seedDatabase(res.data.articles);
-      });
+    // axios
+    //   .get(
+    //     `https://newsapi.org/v2/everything?q=apple&from=2020-09-01&to=2020-09-01&sortBy=popularity&apiKey=${news_api}`
+    //   )
+    //   .then((res) => {
+    //     seedDatabase(res.data.articles);
+    //   });
 
     return () => {
       // window.removeEventListener("scroll", handleScroll);

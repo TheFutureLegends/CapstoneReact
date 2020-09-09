@@ -19,7 +19,7 @@ import CardBody from "components/backend/Card/CardBody.js";
 // Utilities
 import AuthHeader from "services/auth.header";
 import Context from "utils/context";
-import { baseApiUrl } from "services/Api";
+import { baseApiUrl } from "services/api";
 import { tinymce } from "key.js";
 
 import regularFormStyles from "assets/jss/backend/views/regularFormsStyle";

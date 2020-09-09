@@ -142,7 +142,7 @@ const Sidebar = (props) => {
             onClick={() => openCollapse("openAvatar")}
           >
             <ListItemText
-              primary={rtlActive ? "تانيا أندرو" : value.username}
+              primary={rtlActive ? "تانيا أندرو" : value.user.username}
               secondary={
                 <b
                   className={

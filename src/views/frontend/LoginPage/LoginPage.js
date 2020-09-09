@@ -1,7 +1,6 @@
 /*eslint-disable*/
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -9,6 +8,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // import ListItem from "@material-ui/core/ListItem";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
+import Face from "@material-ui/icons/Face";
 import Email from "@material-ui/icons/Email";
 import GridContainer from "components/frontend/Grid/GridContainer.js";
 import GridItem from "components/frontend/Grid/GridItem.js";
@@ -28,7 +28,9 @@ const useStyles = makeStyles(loginPageStyle);
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
+
   const [password, setPassword] = useState("");
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const onChangeUsername = (e) => {
@@ -45,14 +47,14 @@ const LoginPage = () => {
 
   let history = useHistory();
 
-  function submitForm(e) {
+  const submitForm = (e) => {
     e.preventDefault();
 
     AuthService.login(username, password).then(() => {
       history.push("/");
       window.location.reload();
     });
-  }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -77,6 +79,9 @@ const LoginPage = () => {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
+            {/**
+             * Login page
+             */}
             <GridItem xs={12} sm={12} md={4}>
               <Card>
                 <form className={classes.form}>
@@ -129,7 +134,7 @@ const LoginPage = () => {
                         onChange: onChangeUsername,
                         startAdornment: (
                           <InputAdornment position="start">
-                            <Email className={classes.inputIconsColor} />
+                            <Face className={classes.inputAdornmentIcon} />
                           </InputAdornment>
                         ),
                       }}
