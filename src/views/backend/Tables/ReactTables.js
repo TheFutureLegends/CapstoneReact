@@ -1,9 +1,4 @@
-import React, { useContext, useState, useEffect, createRef } from "react";
-
-import axios from "axios";
-import { baseApiUrl } from "services/api";
-import { substring_text } from "utils/functions";
-import AuthHeader from "services/auth.header";
+import React, { useContext, useState, useEffect } from "react";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -37,13 +32,12 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 const ReactTables = () => {
-  const reactTable = createRef();
-
   const value = useContext(Context);
 
+  // eslint-disable-next-line
   const [isFetching, setIsFetching] = useState(true);
 
-  const [isMapping, setIsMapping] = useState(false);
+  const [isMapping, setIsMapping] = useState(true);
 
   const [dataTable, setDataTable] = useState({
     headerRow: ["Title", "Description", "Visit", "Created At", "Actions"],
@@ -54,11 +48,15 @@ const ReactTables = () => {
   const [data, setData] = React.useState([]);
 
   function setDataRows() {
-    setDataTable({ ...dataTable, dataRows: value.data });
+    setDataTable({
+      ...dataTable,
+      dataRows: value.data,
+    });
   }
 
   function setReactTable() {
-    if (data.length < dataTable.dataRows.length) {
+    if (data.length < dataTable.dataRows.length && isMapping) {
+      // eslint-disable-next-line
       dataTable.dataRows.map((prop, key) => {
         data.push({
           id: key,
@@ -74,6 +72,7 @@ const ReactTables = () => {
                 round
                 simple
                 onClick={() => {
+                  // eslint-disable-next-line
                   let obj = data.find((o) => o.id === key);
 
                   console.log(obj);
@@ -147,98 +146,8 @@ const ReactTables = () => {
             </div>
           ),
         });
-
-        // setData([
-        //   ...data,
-        //   {
-        //     id: key,
-        //     title: prop[0],
-        //     description: prop[1],
-        //     visit: prop[2],
-        //     actions: (
-        //       // we've added some custom button actions
-        //       <div className="actions-right">
-        //         {/* use this button to add a like kind of action */}
-        //         <Button
-        //           justIcon
-        //           round
-        //           simple
-        //           onClick={() => {
-        //             let obj = data.find((o) => o.id === key);
-
-        //             console.log(obj);
-
-        //             console.log(key);
-        //             // alert(
-        //             //   "You've clicked LIKE button on \n{ \nName: " +
-        //             //     obj.name +
-        //             //     ", \nposition: " +
-        //             //     obj.position +
-        //             //     ", \noffice: " +
-        //             //     obj.office +
-        //             //     ", \nage: " +
-        //             //     obj.age +
-        //             //     "\n}."
-        //             // );
-        //             // console.log("Clicked: " + obj.title);
-        //           }}
-        //           color="info"
-        //           className="like"
-        //         >
-        //           <Favorite />
-        //         </Button>{" "}
-        //         {/* use this button to add a edit kind of action */}
-        //         <Button
-        //           justIcon
-        //           round
-        //           simple
-        //           onClick={() => {
-        //             // let obj = data.find((o) => o.id === key);
-        //             // alert(
-        //             //   "You've clicked EDIT button on \n{ \nName: " +
-        //             //     obj.name +
-        //             //     ", \nposition: " +
-        //             //     obj.position +
-        //             //     ", \noffice: " +
-        //             //     obj.office +
-        //             //     ", \nage: " +
-        //             //     obj.age +
-        //             //     "\n}."
-        //             // );
-        //           }}
-        //           color="warning"
-        //           className="edit"
-        //         >
-        //           <Dvr />
-        //         </Button>{" "}
-        //         {/* use this button to remove the data row */}
-        //         <Button
-        //           justIcon
-        //           round
-        //           simple
-        //           onClick={() => {
-        //             var newData = data;
-        //             newData.find((o, i) => {
-        //               if (o.id === key) {
-        //                 // here you should add some custom code so you can delete the data
-        //                 // from this component and from your server as well
-        //                 newData.splice(i, 1);
-        //                 return true;
-        //               }
-        //               return false;
-        //             });
-        //             setData([...newData]);
-        //           }}
-        //           color="danger"
-        //           className="remove"
-        //         >
-        //           <Close />
-        //         </Button>{" "}
-        //       </div>
-        //     ),
-        //   },
-        // ]);
       });
+      setIsMapping(false);
     }
   }
 
@@ -250,7 +159,8 @@ const ReactTables = () => {
     return () => {
       setReactTable();
     };
-  }, [data, dataTable.dataRows, isFetching, value.data]);
+    // eslint-disable-next-line
+  }, [data, dataTable.dataRows, isMapping, isFetching, value.data]);
 
   return (
     <GridContainer>

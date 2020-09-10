@@ -134,7 +134,9 @@ const NavBar = () => {
                   "Settings and other stuff",
                   { divider: true },
                   // <Button href="/study-guides">Showcase</Button>,
-                  <a onClick={() => handleLogout()}>Sign out</a>,
+                  <a href="#" onClick={() => handleLogout()}>
+                    Sign out
+                  </a>,
                 ]}
               />
             </ListItem>

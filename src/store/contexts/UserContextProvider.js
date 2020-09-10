@@ -45,6 +45,7 @@ const UserContextProvider = (props) => {
                 },
               })
               .then((postData) => {
+                // eslint-disable-next-line
                 postData.data.map((result, key) => {
                   array.push([
                     // result.id,
