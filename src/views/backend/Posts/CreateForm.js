@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 // For TinyMCE Rich Text Editor
 import { Editor } from "@tinymce/tinymce-react";
@@ -27,6 +28,8 @@ import regularFormStyles from "assets/jss/backend/views/regularFormsStyle";
 const regularFormStyle = makeStyles(regularFormStyles);
 
 const CreateForm = () => {
+  let history = useHistory();
+
   const authUser = useContext(Context);
 
   const [title, setTitle] = useState("");
@@ -85,6 +88,8 @@ const CreateForm = () => {
         }
       )
       .then((response) => {
+        history.push("/admin/posts");
+        
         window.location.reload();
       })
       .catch((error) => {

@@ -111,9 +111,16 @@ const register = (username, email, password) => {
     });
 };
 
-const logout = () => {
+const Logout = () => {
+  let history = useHistory();
+
   localStorage.removeItem("user_access");
+
   localStorage.removeItem("user_refresh");
+
+  history.push("/login");
+
+  window.location.reload();
 };
 
 const getCurrentAuthenticatedUsername = () => {
@@ -133,6 +140,6 @@ export default {
   refreshToken,
   login,
   register,
-  logout,
+  Logout,
   getCurrentAuthenticatedUsername,
 };
