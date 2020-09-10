@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, createRef } from "react";
 
 import axios from "axios";
 import { baseApiUrl } from "services/api";
@@ -37,6 +37,8 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 const ReactTables = () => {
+  const reactTable = createRef();
+
   const value = useContext(Context);
 
   const [isFetching, setIsFetching] = useState(true);
@@ -46,133 +48,209 @@ const ReactTables = () => {
   const [dataTable, setDataTable] = useState({
     headerRow: ["Title", "Description", "Visit", "Created At", "Actions"],
     footerRow: ["Title", "Description", "Visit", "Created At", "Actions"],
-    dataRows: [
-      ["Title", "Description", "Visit", "Created At"],
-      ["Title", "Description", "Visit", "Created At"],
-    ],
+    dataRows: [],
   });
 
   const [data, setData] = React.useState([]);
 
-  function mapData() {
-    if (data.length < value.data.length) {
-      setData(...data, [
-        value.data.map((prop, key) => {
-          //
-          // console.log(prop[0]);
-          return {
-            id: key,
-            title: prop[0],
-            description: prop[1],
-            visit: prop[2],
-            actions: (
-              // we've added some custom button actions
-              <div className="actions-right">
-                {/* use this button to add a like kind of action */}
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => {
-                    let obj = data.find((o) => o.id === key);
-                    // alert(
-                    //   "You've clicked LIKE button on \n{ \nName: " +
-                    //     obj.name +
-                    //     ", \nposition: " +
-                    //     obj.position +
-                    //     ", \noffice: " +
-                    //     obj.office +
-                    //     ", \nage: " +
-                    //     obj.age +
-                    //     "\n}."
-                    // );
-                    console.log("Clicked: " + obj.title);
-                  }}
-                  color="info"
-                  className="like"
-                >
-                  <Favorite />
-                </Button>{" "}
-                {/* use this button to add a edit kind of action */}
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => {
-                    // let obj = data.find((o) => o.id === key);
-                    // alert(
-                    //   "You've clicked EDIT button on \n{ \nName: " +
-                    //     obj.name +
-                    //     ", \nposition: " +
-                    //     obj.position +
-                    //     ", \noffice: " +
-                    //     obj.office +
-                    //     ", \nage: " +
-                    //     obj.age +
-                    //     "\n}."
-                    // );
-                  }}
-                  color="warning"
-                  className="edit"
-                >
-                  <Dvr />
-                </Button>{" "}
-                {/* use this button to remove the data row */}
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => {
-                    // var newData = data;
-                    // newData.find((o, i) => {
-                    //   if (o.id === key) {
-                    //     // here you should add some custom code so you can delete the data
-                    //     // from this component and from your server as well
-                    //     newData.splice(i, 1);
-                    //     return true;
-                    //   }
-                    //   return false;
-                    // });
-                    // setData([...newData]);
-                  }}
-                  color="danger"
-                  className="remove"
-                >
-                  <Close />
-                </Button>{" "}
-              </div>
-            ),
-          };
-        }),
-      ]);
-
-      setIsMapping(false);
-    }
+  function setDataRows() {
+    setDataTable({ ...dataTable, dataRows: value.data });
   }
 
-  function fetchData() {
-    if (isFetching) {
-      setDataTable({
-        ...dataTable,
-        dataRows: value.data,
+  function setReactTable() {
+    if (data.length < dataTable.dataRows.length) {
+      dataTable.dataRows.map((prop, key) => {
+        data.push({
+          id: key,
+          title: prop[0],
+          description: prop[1],
+          visit: prop[2],
+          actions: (
+            // we've added some custom button actions
+            <div className="actions-right">
+              {/* use this button to add a like kind of action */}
+              <Button
+                justIcon
+                round
+                simple
+                onClick={() => {
+                  let obj = data.find((o) => o.id === key);
+
+                  console.log(obj);
+
+                  console.log(key);
+                  // alert(
+                  //   "You've clicked LIKE button on \n{ \nName: " +
+                  //     obj.name +
+                  //     ", \nposition: " +
+                  //     obj.position +
+                  //     ", \noffice: " +
+                  //     obj.office +
+                  //     ", \nage: " +
+                  //     obj.age +
+                  //     "\n}."
+                  // );
+                  // console.log("Clicked: " + obj.title);
+                }}
+                color="info"
+                className="like"
+              >
+                <Favorite />
+              </Button>{" "}
+              {/* use this button to add a edit kind of action */}
+              <Button
+                justIcon
+                round
+                simple
+                onClick={() => {
+                  // let obj = data.find((o) => o.id === key);
+                  // alert(
+                  //   "You've clicked EDIT button on \n{ \nName: " +
+                  //     obj.name +
+                  //     ", \nposition: " +
+                  //     obj.position +
+                  //     ", \noffice: " +
+                  //     obj.office +
+                  //     ", \nage: " +
+                  //     obj.age +
+                  //     "\n}."
+                  // );
+                }}
+                color="warning"
+                className="edit"
+              >
+                <Dvr />
+              </Button>{" "}
+              {/* use this button to remove the data row */}
+              <Button
+                justIcon
+                round
+                simple
+                onClick={() => {
+                  var newData = data;
+                  newData.find((o, i) => {
+                    if (o.id === key) {
+                      // here you should add some custom code so you can delete the data
+                      // from this component and from your server as well
+                      newData.splice(i, 1);
+                      return true;
+                    }
+                    return false;
+                  });
+                  setData([...newData]);
+                }}
+                color="danger"
+                className="remove"
+              >
+                <Close />
+              </Button>{" "}
+            </div>
+          ),
+        });
+
+        // setData([
+        //   ...data,
+        //   {
+        //     id: key,
+        //     title: prop[0],
+        //     description: prop[1],
+        //     visit: prop[2],
+        //     actions: (
+        //       // we've added some custom button actions
+        //       <div className="actions-right">
+        //         {/* use this button to add a like kind of action */}
+        //         <Button
+        //           justIcon
+        //           round
+        //           simple
+        //           onClick={() => {
+        //             let obj = data.find((o) => o.id === key);
+
+        //             console.log(obj);
+
+        //             console.log(key);
+        //             // alert(
+        //             //   "You've clicked LIKE button on \n{ \nName: " +
+        //             //     obj.name +
+        //             //     ", \nposition: " +
+        //             //     obj.position +
+        //             //     ", \noffice: " +
+        //             //     obj.office +
+        //             //     ", \nage: " +
+        //             //     obj.age +
+        //             //     "\n}."
+        //             // );
+        //             // console.log("Clicked: " + obj.title);
+        //           }}
+        //           color="info"
+        //           className="like"
+        //         >
+        //           <Favorite />
+        //         </Button>{" "}
+        //         {/* use this button to add a edit kind of action */}
+        //         <Button
+        //           justIcon
+        //           round
+        //           simple
+        //           onClick={() => {
+        //             // let obj = data.find((o) => o.id === key);
+        //             // alert(
+        //             //   "You've clicked EDIT button on \n{ \nName: " +
+        //             //     obj.name +
+        //             //     ", \nposition: " +
+        //             //     obj.position +
+        //             //     ", \noffice: " +
+        //             //     obj.office +
+        //             //     ", \nage: " +
+        //             //     obj.age +
+        //             //     "\n}."
+        //             // );
+        //           }}
+        //           color="warning"
+        //           className="edit"
+        //         >
+        //           <Dvr />
+        //         </Button>{" "}
+        //         {/* use this button to remove the data row */}
+        //         <Button
+        //           justIcon
+        //           round
+        //           simple
+        //           onClick={() => {
+        //             var newData = data;
+        //             newData.find((o, i) => {
+        //               if (o.id === key) {
+        //                 // here you should add some custom code so you can delete the data
+        //                 // from this component and from your server as well
+        //                 newData.splice(i, 1);
+        //                 return true;
+        //               }
+        //               return false;
+        //             });
+        //             setData([...newData]);
+        //           }}
+        //           color="danger"
+        //           className="remove"
+        //         >
+        //           <Close />
+        //         </Button>{" "}
+        //       </div>
+        //     ),
+        //   },
+        // ]);
       });
-
-      setIsFetching(false);
-
-      setIsMapping(true);
     }
   }
 
   const classes = useStyles();
 
   useEffect(() => {
-    fetchData();
-    mapData();
+    setDataRows(dataTable.dataRows);
+    setReactTable();
     return () => {
-      fetchData();
-      mapData();
+      setReactTable();
     };
-  }, [data, dataTable.dataRows, isFetching, isMapping, value.data]);
+  }, [data, dataTable.dataRows, isFetching, value.data]);
 
   return (
     <GridContainer>

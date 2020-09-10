@@ -15,6 +15,8 @@ import LoginPage from "views/frontend/LoginPage/LoginPage.js";
 import SignupPage from "views/frontend/SignupPage/SignupPage.js";
 import SectionsPage from "views/frontend/SectionsPage/SectionsPage.js";
 
+import Chatbot from "views/frontend/Chatbot";
+
 // import AuthLayout from "layouts/Auth.js";
 // import RtlLayout from "layouts/RTL.js";
 import AdminLayout from "layouts/Admin.js";
