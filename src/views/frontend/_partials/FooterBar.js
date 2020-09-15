@@ -39,16 +39,16 @@ const FooterBar = () => {
               </ListItem>
               <ListItem className={classes.inlineBlock}>
                 <a
-                  href="/study-guides"
+                  href="/about-us"
                   target="_blank"
                   className={classes.block}
                 >
-                  Showcase
+                  About Us
                 </a>
               </ListItem>
               <ListItem className={classes.inlineBlock}>
-                <a href="/about-us" target="_blank" className={classes.block}>
-                  About us
+                <a href="/contact-us" target="_blank" className={classes.block}>
+                  Contact us
                 </a>
               </ListItem>
             </List>

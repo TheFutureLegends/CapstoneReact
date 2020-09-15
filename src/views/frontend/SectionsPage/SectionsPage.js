@@ -280,10 +280,10 @@ export default function SectionsPage() {
     <div className={classes.main}>
       <NavBar></NavBar>
       <SectionHeaders id="headers" />
-      <SectionFeatures id="features" />
+      {/* <SectionFeatures id="features" /> */}
       <SectionBlogs id="blogs" />
       <SectionProjects id="projects" />
-      <SectionTeams id="teams" />
+      {/* <SectionTeams id="teams" /> */}
       <SectionContacts id="contacts" />
       <FooterBar></FooterBar>
     </div>

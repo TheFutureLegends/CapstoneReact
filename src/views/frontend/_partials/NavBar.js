@@ -82,15 +82,6 @@ const NavBar = () => {
           </ListItem>
           <ListItem className={classes.listItem}>
             <Button
-              href="/study-guides"
-              className={classes.navLink}
-              color="transparent"
-            >
-              Showcase
-            </Button>
-          </ListItem>
-          <ListItem className={classes.listItem}>
-            <Button
               href="/about-us"
               className={classes.navLink}
               color="transparent"

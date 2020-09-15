@@ -181,7 +181,7 @@ const SectionProjects = ({ ...rest }) => {
       </div>
       {/* Latest Study Guide END */}
       {/* Showcase START */}
-      <div
+      {/* <div
         className={
           classes.projects + " " + classes.sectionDark + " " + classes.projects3
         }
@@ -290,7 +290,7 @@ const SectionProjects = ({ ...rest }) => {
             </GridItem>
           </GridContainer>
         </div>
-      </div>
+      </div> */}
       {/* Showcase END */}
     </div>
   );
