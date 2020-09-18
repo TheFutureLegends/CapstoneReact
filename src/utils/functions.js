@@ -80,10 +80,15 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+const getRandomElementFromArray = (array) => {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
 export {
   isEmpty,
   string_to_slug,
   strip_tags,
   substring_text,
   getRandomInt,
+  getRandomElementFromArray,
 };

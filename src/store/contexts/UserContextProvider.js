@@ -22,17 +22,41 @@ const UserContextProvider = (props) => {
   const [isFetching, setIsFetching] = useState(true);
 
   function fetchAuthenticatedUser() {
-    if (!localStorage.getItem("user_access")) {
-      localStorage.removeItem("user_access");
+    var pathNameArr = props.location.pathname.split("/");
 
-      localStorage.removeItem("user_refresh");
+    if (pathNameArr[1] === "admin" && isFetching) {
+      if (
+        !localStorage.getItem("user_access") ||
+        !localStorage.getItem("user_refresh")
+      ) {
+        localStorage.removeItem("user_access");
 
-      history.push("/login");
+        localStorage.removeItem("user_refresh");
 
-      window.location.reload();
+        history.push("/login");
+
+        window.location.reload();
+      } else {
+        setIsAuthenticated({
+          ...isAuthenticated,
+          isAuthenticated: true,
+        });
+      }
+    } else {
+      if (pathNameArr[1] !== "admin") {
+        if (
+          localStorage.getItem("user_access") &&
+          !isAuthenticated.isAuthenticated
+        ) {
+          setIsAuthenticated({
+            ...isAuthenticated,
+            isAuthenticated: true,
+          });
+        }
+      }
     }
 
-    if (isEmpty(isAuthenticated.user)) {
+    if (isAuthenticated.isAuthenticated && isEmpty(isAuthenticated.user)) {
       AuthService.getCurrentAuthenticatedUsername()
         .then((response) => {
           if (isFetching) {
@@ -79,7 +103,6 @@ const UserContextProvider = (props) => {
 
   useEffect(() => {
     fetchAuthenticatedUser();
-    // fetchData();
     return () => {
       fetchAuthenticatedUser();
     };

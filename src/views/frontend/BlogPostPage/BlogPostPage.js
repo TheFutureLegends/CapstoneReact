@@ -8,8 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 // import List from "@material-ui/core/List";
 // import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
-import FormatAlignLeft from "@material-ui/icons/FormatAlignLeft";
-import Favorite from "@material-ui/icons/Favorite";
+// import FormatAlignLeft from "@material-ui/icons/FormatAlignLeft";
+// import Favorite from "@material-ui/icons/Favorite";
 // core components
 // import Header from "components/frontend/Header/Header.js";
 // import HeaderLinks from "components/frontend/Header/HeaderLinks.js";
@@ -23,7 +23,7 @@ import Button from "components/frontend/CustomButtons/Button.js";
 import SectionText from "./Sections/SectionText.js";
 import SectionBlogInfo from "./Sections/SectionBlogInfo.js";
 import SectionComments from "./Sections/SectionComments.js";
-import SectionSimilarStories from "./Sections/SectionSimilarStories.js";
+// import SectionSimilarStories from "./Sections/SectionSimilarStories.js";
 
 import blogPostPageStyle from "assets/jss/frontend/views/blogPostPageStyle.js";
 
@@ -31,16 +31,39 @@ import NavBar from "views/frontend/_partials/NavBar";
 import FooterBar from "views/frontend/_partials/FooterBar.js";
 
 import { baseApiUrl } from "services/api.js";
-import { nytime_api } from "key.js";
+// import { nytime_api } from "key.js";
 
 const useStyles = makeStyles(blogPostPageStyle);
 
 const BlogPostPage = (props) => {
+  const [isFetching, setIsFetching] = useState(true);
+
   const [blogPost, setBlogPost] = useState({
     image: "",
     title: "",
     content: "",
+    slug: "",
   });
+
+  const [commentDetails, setCommentDetails] = useState({
+    length: 0,
+    data: [],
+  });
+
+  const getBlogPostFromUrl = () => {
+    if (isFetching) {
+      axios.get(baseApiUrl + "/post/" + props.match.params.slug).then((res) => {
+        setBlogPost({
+          image: res.data.urlToImage,
+          title: res.data.title,
+          content: res.data.content,
+          slug: res.data.slug,
+        });
+      });
+
+      setIsFetching(false);
+    }
+  };
 
   useEffect(() => {
     // axios
@@ -50,23 +73,20 @@ const BlogPostPage = (props) => {
     //   .then((res) => {
     //     console.log(res);
     //   });
-    axios.get(baseApiUrl + "/post/" + props.match.params.slug).then((res) => {
-      setBlogPost({
-        image: res.data.urlToImage,
-        title: res.data.title,
-        content: res.data.content,
-      });
-    });
+
+    getBlogPostFromUrl();
 
     window.scrollTo(0, 0);
 
     document.body.scrollTop = 0;
 
     return () => {
-      setBlogPost(false);
+      getBlogPostFromUrl();
     };
-  }, []);
+  }, [blogPost, isFetching]);
+
   const classes = useStyles();
+
   return (
     <div>
       <NavBar></NavBar>
@@ -80,9 +100,9 @@ const BlogPostPage = (props) => {
                 did.
               </h4> */}
               <br />
-              <Button color="rose" size="lg" round>
+              {/* <Button color="rose" size="lg" round>
                 <FormatAlignLeft /> Read Article
-              </Button>
+              </Button> */}
             </GridItem>
           </GridContainer>
         </div>
@@ -91,10 +111,10 @@ const BlogPostPage = (props) => {
         <div className={classes.container}>
           <SectionText description={blogPost.content} />
           <SectionBlogInfo />
-          <SectionComments />
+          <SectionComments slug={props.match.params.slug} />
         </div>
       </div>
-      <SectionSimilarStories />
+      {/* <SectionSimilarStories /> */}
       <FooterBar></FooterBar>
     </div>
   );

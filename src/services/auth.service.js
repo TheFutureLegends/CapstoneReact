@@ -82,21 +82,32 @@ const refreshToken = () => {
     });
 };
 
-const login = (username, password) => {
-  return axios
-    .post(authUrl + "/jwt/create/", {
-      username: username,
-      password: password,
-    })
-    .then((response) => {
-      if (response.data.access) {
-        // localStorage.setItem("user", JSON.stringify(response.data));
-        localStorage.setItem("user_access", response.data.access);
-        localStorage.setItem("user_refresh", response.data.refresh);
-      }
+// const login = (username, password) => {
+//   return axios
+//     .post(authUrl + "/jwt/create/", {
+//       username: username,
+//       password: password,
+//     })
+//     .then((response) => {
+//       if (response.data.access) {
+//         // localStorage.setItem("user", JSON.stringify(response.data));
+//         localStorage.setItem("user_access", response.data.access);
+//         localStorage.setItem("user_refresh", response.data.refresh);
+//       }
 
-      return response.data;
-    });
+//       return response.data;
+//     });
+// };
+
+const login = (loginDetail) => {
+  return axios.post(authUrl + "/jwt/create/", loginDetail).then((response) => {
+    if (response.data.access) {
+      localStorage.setItem("user_access", response.data.access);
+
+      localStorage.setItem("user_refresh", response.data.refresh);
+    }
+    return response.data;
+  });
 };
 
 const register = (registerDetail) => {
@@ -118,7 +129,6 @@ const register = (registerDetail) => {
 // };
 
 const Logout = () => {
-
   localStorage.removeItem("user_access");
 
   localStorage.removeItem("user_refresh");

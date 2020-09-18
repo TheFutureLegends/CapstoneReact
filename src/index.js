@@ -39,25 +39,27 @@ const App = () => {
   return (
     <Router history={hist}>
       <Switch>
-        {/* Official Frontend URL */}
-        <Route exact path="/" component={SectionsPage} />
-        <Route exact path="/study-guides" component={BlogPostsPage} />
-        <Route path="/study-guide/:slug" component={BlogPostPage} />
-        {/* <UserContextProvider> */}
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={SignupPage} />
-        {/* </UserContextProvider> */}
-        <Route path="/about-us" component={AboutUsPage} />
-        <Route path="/contact-us" component={ContactUsPage} />
-
-        {/* Official Backend URL */}
-        {/* <Route path="/rtl" component={RtlLayout} />
-        <Route path="/auth" component={AuthLayout} /> */}
         <UserContextProvider>
+          {/* Official Frontend URL */}
+          <Route exact path="/" component={SectionsPage} />
+          <Route exact path="/study-guides" component={BlogPostsPage} />
+          <Route path="/study-guide/:slug" component={BlogPostPage} />
+          {/* <UserContextProvider> */}
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={SignupPage} />
+          {/* </UserContextProvider> */}
+          <Route path="/about-us" component={AboutUsPage} />
+          <Route path="/contact-us" component={ContactUsPage} />
+
+          {/* Official Backend URL */}
+          {/* <Route path="/rtl" component={RtlLayout} />
+        <Route path="/auth" component={AuthLayout} /> */}
+
           <Route path="/admin" component={AdminLayout} />
         </UserContextProvider>
 
         <Redirect from="/admin" to="/admin/dashboard" />
+        <Redirect from="/dashboard" to="/admin/dashboard" />
       </Switch>
     </Router>
   );

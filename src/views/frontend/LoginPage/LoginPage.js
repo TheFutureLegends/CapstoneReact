@@ -9,7 +9,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Face from "@material-ui/icons/Face";
-import Email from "@material-ui/icons/Email";
 import GridContainer from "components/frontend/Grid/GridContainer.js";
 import GridItem from "components/frontend/Grid/GridItem.js";
 import Button from "components/frontend/CustomButtons/Button.js";
@@ -27,30 +26,17 @@ import AuthService from "services/auth.service";
 const useStyles = makeStyles(loginPageStyle);
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("");
-
-  const [password, setPassword] = useState("");
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const onChangeUsername = (e) => {
-    const username_value = e.target.value;
-
-    setUsername(username_value);
-  };
-
-  const onChangePassword = (e) => {
-    const password_value = e.target.value;
-
-    setPassword(password_value);
-  };
+  const [loginDetail, setLoginDetail] = useState({
+    username: "",
+    password: "",
+  });
 
   let history = useHistory();
 
   const submitForm = (e) => {
     e.preventDefault();
 
-    AuthService.login(username, password).then(() => {
+    AuthService.login(loginDetail).then(() => {
       history.push("/");
       window.location.reload();
     });
@@ -127,11 +113,16 @@ const LoginPage = () => {
                       formControlProps={{
                         fullWidth: true,
                       }}
-                      value={username}
+                      value={loginDetail.username}
                       inputProps={{
                         placeholder: "Username...",
                         type: "email",
-                        onChange: onChangeUsername,
+                        onChange: (e) => {
+                          setLoginDetail({
+                            ...loginDetail,
+                            username: e.target.value,
+                          });
+                        },
                         startAdornment: (
                           <InputAdornment position="start">
                             <Face className={classes.inputAdornmentIcon} />
@@ -144,10 +135,16 @@ const LoginPage = () => {
                       formControlProps={{
                         fullWidth: true,
                       }}
+                      value={loginDetail.password}
                       inputProps={{
                         placeholder: "Password",
                         type: "password",
-                        onChange: onChangePassword,
+                        onChange: (e) => {
+                          setLoginDetail({
+                            ...loginDetail,
+                            password: e.target.value,
+                          });
+                        },
                         startAdornment: (
                           <InputAdornment position="start">
                             <Icon className={classes.inputIconsColor}>

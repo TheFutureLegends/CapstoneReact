@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -13,20 +13,15 @@ import navbarsStyle from "assets/jss/frontend/views/componentsSections/navbarsSt
 import profileImage from "assets/img/faces/avatar.jpg";
 
 import AuthService from "services/auth.service";
+import Context from "utils/context";
 
 const useStyles = makeStyles(headersStyle);
 const navbarStyles = makeStyles(navbarsStyle);
 
 const NavBar = () => {
   let history = useHistory();
-  
-  // eslint-disable-next-line no-unused-vars
-  const [isLoggedIn, setIsLoggedIn] = AuthService.CheckAuthenticatedUser();
 
-  const [authenticatedUser, setAuthenticatedUser] = useState({
-    username: "",
-    email: "",
-  });
+  const userContext = useContext(Context);
 
   const classes = useStyles();
 
@@ -40,24 +35,10 @@ const NavBar = () => {
     window.location.reload();
   }
 
-  function fetchAuthenticatedUser() {
-    if (isLoggedIn) {
-      AuthService.getCurrentAuthenticatedUsername().then((response) => {
-        setAuthenticatedUser({
-          username: response.username,
-          email: response.email,
-        });
-      });
-    }
-  }
-
   useEffect(() => {
-    fetchAuthenticatedUser();
-    return () => {
-      fetchAuthenticatedUser();
-    };
+    return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
+  }, [userContext]);
 
   return (
     <Header
@@ -103,12 +84,12 @@ const NavBar = () => {
             </Button>
           </ListItem> */}
           {/* {getAuthUser()} */}
-          {isLoggedIn ? (
+          {userContext.isAuthenticated ? (
             <ListItem className={classes.listItem}>
               <CustomDropdown
                 left
                 caret={true}
-                dropdownHeader={authenticatedUser.username}
+                dropdownHeader={userContext.user.username}
                 hoverColor="dark"
                 buttonText={
                   <img
