@@ -1,5 +1,9 @@
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
+
 const authHeader = () => {
-  const access = localStorage.getItem("user_access");
+  const access = cookies.get("access_cookie");
 
   if (access) {
     return {
@@ -12,7 +16,7 @@ const authHeader = () => {
 };
 
 const authBearerHeader = () => {
-  const access = localStorage.getItem("user_access");
+  const access = cookies.get("access_cookie");
 
   if (access) {
     return "Bearer " + access;

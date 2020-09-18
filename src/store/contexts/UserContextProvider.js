@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Cookies from "universal-cookie";
+import axios from "axios";
 
-import { BACKEND_URL } from "services/api";
+import { COOKIE_DOMAIN, BACKEND_URL } from "services/api";
 import { substring_text } from "utils/functions";
 import { isEmpty } from "utils/functions";
 
 import Context from "utils/context";
 import AuthService from "services/auth.service";
 import AuthHeader from "services/auth.header";
+
+const cookies = new Cookies();
 
 const UserContextProvider = (props) => {
   let history = useHistory();
@@ -24,19 +27,9 @@ const UserContextProvider = (props) => {
   function fetchAuthenticatedUser() {
     var pathNameArr = props.location.pathname.split("/");
 
-    const access = localStorage.getItem("user_access");
+    const access = cookies.get("access_cookie");
 
-    const refresh = localStorage.getItem("user_refresh");
-
-    // if (!access || !refresh) {
-    //   localStorage.removeItem("user_access");
-
-    //   localStorage.removeItem("user_refresh");
-
-    //   history.push("/login");
-
-    //   window.location.reload();
-    // }
+    const refresh = cookies.get("refresh_cookie");
 
     if (isFetching) {
       if (pathNameArr[1] === "admin") {
@@ -46,10 +39,16 @@ const UserContextProvider = (props) => {
             isAuthenticated: true,
           });
         } else if (!access || !refresh) {
-            localStorage.removeItem("user_access");
-            localStorage.removeItem("user_refresh");
-            history.push("/login");
-            window.location.reload();
+          cookies.remove("access_cookie", { path: "/", domain: COOKIE_DOMAIN });
+
+          cookies.remove("refresh_cookie", {
+            path: "/",
+            domain: COOKIE_DOMAIN,
+          });
+
+          history.push("/login");
+
+          window.location.reload();
         }
       } else {
         if (access && !isAuthenticated.isAuthenticated) {
@@ -95,9 +94,12 @@ const UserContextProvider = (props) => {
           }
         })
         .catch((error) => {
-          localStorage.removeItem("user_access");
+          cookies.remove("access_cookie", { path: "/", domain: COOKIE_DOMAIN });
 
-          localStorage.removeItem("user_refresh");
+          cookies.remove("refresh_cookie", {
+            path: "/",
+            domain: COOKIE_DOMAIN,
+          });
 
           history.push("/login");
 
