@@ -18,7 +18,7 @@ import Parallax from "components/frontend/Parallax/Parallax.js";
 
 import GridContainer from "components/frontend/Grid/GridContainer.js";
 import GridItem from "components/frontend/Grid/GridItem.js";
-import Button from "components/frontend/CustomButtons/Button.js";
+// import Button from "components/frontend/CustomButtons/Button.js";
 // sections for this page
 import SectionText from "./Sections/SectionText.js";
 import SectionBlogInfo from "./Sections/SectionBlogInfo.js";
@@ -30,7 +30,7 @@ import blogPostPageStyle from "assets/jss/frontend/views/blogPostPageStyle.js";
 import NavBar from "views/frontend/_partials/NavBar";
 import FooterBar from "views/frontend/_partials/FooterBar.js";
 
-import { baseApiUrl } from "services/api.js";
+import { BACKEND_URL } from "services/api";
 // import { nytime_api } from "key.js";
 
 const useStyles = makeStyles(blogPostPageStyle);
@@ -45,21 +45,18 @@ const BlogPostPage = (props) => {
     slug: "",
   });
 
-  const [commentDetails, setCommentDetails] = useState({
-    length: 0,
-    data: [],
-  });
-
   const getBlogPostFromUrl = () => {
     if (isFetching) {
-      axios.get(baseApiUrl + "/post/" + props.match.params.slug).then((res) => {
-        setBlogPost({
-          image: res.data.urlToImage,
-          title: res.data.title,
-          content: res.data.content,
-          slug: res.data.slug,
+      axios
+        .get(BACKEND_URL + "/api/post/" + props.match.params.slug)
+        .then((res) => {
+          setBlogPost({
+            image: res.data.urlToImage,
+            title: res.data.title,
+            content: res.data.content,
+            slug: res.data.slug,
+          });
         });
-      });
 
       setIsFetching(false);
     }

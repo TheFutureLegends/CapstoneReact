@@ -33,7 +33,7 @@ import ReactTable from "components/backend/ReactTable/ReactTable.js";
 import { cardTitle } from "assets/jss/backend.js";
 
 import Context from "utils/context";
-import { baseApiUrl } from "services/api";
+import { BACKEND_URL } from "services/api";
 import AuthHeader from "services/auth.header";
 import AuthService from "services/auth.service";
 import { tinymce } from "key.js";
@@ -101,7 +101,7 @@ const Posts = () => {
 
   function openEditModal(e) {
     axios
-      .get(baseApiUrl + `/post/${slug.slug}/edit`, {
+      .get(BACKEND_URL + `/api/post/${slug.slug}/edit`, {
         headers: {
           Authorization: AuthHeader.authBearerHeader(),
         },
@@ -227,7 +227,7 @@ const Posts = () => {
 
                   var id = e.currentTarget.id;
                   axios
-                    .delete(baseApiUrl + `/post/${id}/delete`, {
+                    .delete(BACKEND_URL + `/api/post/${id}/delete`, {
                       headers: {
                         Authorization: AuthHeader.authBearerHeader(),
                       },
@@ -259,7 +259,7 @@ const Posts = () => {
     e.preventDefault();
 
     axios
-      .put(baseApiUrl + `/post/${slug.slug}/update`, post, {
+      .put(BACKEND_URL + `/api/post/${slug.slug}/update`, post, {
         headers: {
           Authorization: AuthHeader.authBearerHeader(),
         },

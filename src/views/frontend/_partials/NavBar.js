@@ -110,6 +110,7 @@ const NavBar = () => {
                   "Settings and other stuff",
                   { divider: true },
                   // <Button href="/study-guides">Showcase</Button>,
+                  // eslint-disable-next-line
                   <a href="#" onClick={() => handleLogout()}>
                     Sign out
                   </a>,

@@ -18,7 +18,7 @@ import placeholder from "assets/img/placeholder.jpg";
 import sectionCommentsStyle from "assets/jss/frontend/views/blogPostSections/sectionCommentsStyle.js";
 import style from "assets/jss/frontend/views/componentsSections/contentAreas.js";
 
-import { baseApiUrl } from "services/api";
+import { BACKEND_URL } from "services/api";
 import { isEmpty, getRandomElementFromArray } from "utils/functions";
 import Context from "utils/context";
 import { profileArray } from "utils/images";
@@ -51,14 +51,14 @@ const SectionComments = (props) => {
 
   const getComment = () => {
     if (isFetching) {
-      axios.get(baseApiUrl + `/post/${rest.slug}/`).then((res) => {
+      axios.get(BACKEND_URL + `/api/post/${rest.slug}/`).then((res) => {
         setStoreComment({
           ...storeComment,
           post_id: res.data.id,
         });
       });
       axios
-        .get(baseApiUrl + `/post/${rest.slug}/comments/`)
+        .get(BACKEND_URL + `/api/post/${rest.slug}/comments/`)
         .then((res) => {
           if (res.data.length > 0) {
             setCommentDetails({
@@ -85,7 +85,7 @@ const SectionComments = (props) => {
     e.preventDefault();
 
     axios
-      .post(baseApiUrl + `/post/${rest.slug}/comments/`, storeComment)
+      .post(BACKEND_URL + `/api/post/${rest.slug}/comments/`, storeComment)
       .then((res) => {
         setIsFetching(true);
         document.getElementById("content").value = "";

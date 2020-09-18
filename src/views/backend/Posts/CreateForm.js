@@ -20,7 +20,7 @@ import CardBody from "components/backend/Card/CardBody.js";
 // Utilities
 import AuthHeader from "services/auth.header";
 import Context from "utils/context";
-import { baseApiUrl } from "services/api";
+import { BACKEND_URL } from "services/api";
 import { tinymce } from "key.js";
 
 import regularFormStyles from "assets/jss/backend/views/regularFormsStyle";
@@ -46,7 +46,7 @@ const CreateForm = () => {
     e.preventDefault();
 
     axios
-      .post(baseApiUrl + "/post/store", createDetail, {
+      .post(BACKEND_URL + "/api/post/store", createDetail, {
         headers: AuthHeader.authHeader(),
       })
       .then((response) => {

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-
 import axios from "axios";
-import { baseApiUrl } from "services/api";
-import { substring_text } from "utils/functions";
-import AuthHeader from "services/auth.header";
-
 import { useHistory } from "react-router-dom";
+
+import { BACKEND_URL } from "services/api";
+import { substring_text } from "utils/functions";
+import { isEmpty } from "utils/functions";
+
 import Context from "utils/context";
 import AuthService from "services/auth.service";
-import { isEmpty } from "utils/functions.js";
+import AuthHeader from "services/auth.header";
 
 const UserContextProvider = (props) => {
   let history = useHistory();
@@ -24,30 +24,35 @@ const UserContextProvider = (props) => {
   function fetchAuthenticatedUser() {
     var pathNameArr = props.location.pathname.split("/");
 
-    if (pathNameArr[1] === "admin" && isFetching) {
-      if (
-        !localStorage.getItem("user_access") ||
-        !localStorage.getItem("user_refresh")
-      ) {
-        localStorage.removeItem("user_access");
+    const access = localStorage.getItem("user_access");
 
-        localStorage.removeItem("user_refresh");
+    const refresh = localStorage.getItem("user_refresh");
 
-        history.push("/login");
+    // if (!access || !refresh) {
+    //   localStorage.removeItem("user_access");
 
-        window.location.reload();
+    //   localStorage.removeItem("user_refresh");
+
+    //   history.push("/login");
+
+    //   window.location.reload();
+    // }
+
+    if (isFetching) {
+      if (pathNameArr[1] === "admin") {
+        if (access && refresh && !isAuthenticated.isAuthenticated) {
+          setIsAuthenticated({
+            ...isAuthenticated,
+            isAuthenticated: true,
+          });
+        } else if (!access || !refresh) {
+            localStorage.removeItem("user_access");
+            localStorage.removeItem("user_refresh");
+            history.push("/login");
+            window.location.reload();
+        }
       } else {
-        setIsAuthenticated({
-          ...isAuthenticated,
-          isAuthenticated: true,
-        });
-      }
-    } else {
-      if (pathNameArr[1] !== "admin") {
-        if (
-          localStorage.getItem("user_access") &&
-          !isAuthenticated.isAuthenticated
-        ) {
+        if (access && !isAuthenticated.isAuthenticated) {
           setIsAuthenticated({
             ...isAuthenticated,
             isAuthenticated: true,
@@ -63,7 +68,7 @@ const UserContextProvider = (props) => {
             const array = [];
 
             axios
-              .get(baseApiUrl + "/posts/dataTable", {
+              .get(BACKEND_URL + "/api/posts/dataTable", {
                 headers: {
                   Authorization: AuthHeader.authBearerHeader(),
                 },

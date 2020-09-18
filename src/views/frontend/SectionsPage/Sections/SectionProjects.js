@@ -17,32 +17,18 @@ import GridContainer from "components/frontend/Grid/GridContainer.js";
 import GridItem from "components/frontend/Grid/GridItem.js";
 import Card from "components/frontend/Card/Card.js";
 import CardBody from "components/frontend/Card/CardBody.js";
-import CardHeader from "components/frontend/Card/CardHeader.js";
+// import CardHeader from "components/frontend/Card/CardHeader.js";
 import Button from "components/frontend/CustomButtons/Button.js";
-import Muted from "components/frontend/Typography/Muted.js";
+// import Muted from "components/frontend/Typography/Muted.js";
 // import InfoArea from "components/frontend/InfoArea/InfoArea.js";
 // import Badge from "components/frontend/Badge/Badge.js";
 // import NavPills from "components/frontend/NavPills/NavPills.js";
 
 import projectsStyle from "assets/jss/frontend/views/sectionsSections/projectsStyle.js";
 
-import office1 from "assets/img/examples/office1.jpg";
-import office2 from "assets/img/examples/office2.jpg";
-import office3 from "assets/img/examples/office3.jpg";
-import office4 from "assets/img/examples/office4.jpg";
+import { strip_tags, substring_text } from "utils/functions";
 
-import cardBlog3 from "assets/img/examples/card-blog3.jpg";
-import cardProject1 from "assets/img/examples/card-project1.jpg";
-import cardProject2 from "assets/img/examples/card-project2.jpg";
-import cardProject3 from "assets/img/examples/card-project3.jpg";
-import cardProject4 from "assets/img/examples/card-project4.jpg";
-import cardProject5 from "assets/img/examples/card-project5.jpg";
-import cardProject6 from "assets/img/examples/card-project6.jpg";
-
-import {
-  strip_tags,
-  substring_description,
-} from "views/frontend/_partials/Miscellaneous.js";
+import { BACKEND_URL } from "services/api";
 
 const useStyles = makeStyles(projectsStyle);
 
@@ -51,19 +37,8 @@ const SectionProjects = ({ ...rest }) => {
 
   const [latestPost, setLatestPost] = useState([]);
 
-  const officeBg = [office1, office2, office3, office4];
-
-  const cardProjectBg = [
-    cardProject1,
-    cardProject2,
-    cardProject3,
-    cardProject4,
-    cardProject5,
-    cardProject6,
-  ];
-
   useEffect(() => {
-    axios.get("http://localhost:8000/api/posts/latest/").then((res) => {
+    axios.get(BACKEND_URL + "/api/posts/latest/").then((res) => {
       setLatestPost(res.data);
     });
 
@@ -98,23 +73,21 @@ const SectionProjects = ({ ...rest }) => {
                     raised
                     background
                     style={{
-                      backgroundImage: `url(${
-                        officeBg[Math.floor(Math.random() * officeBg.length)]
-                      })`,
+                      backgroundImage: `url(${response.urlToImage})`,
                     }}
                   >
                     <CardBody background>
                       <h6 className={classes.cardCategory}>PRODUCTIVITY</h6>
                       <a href={"/study-guide/" + response.slug}>
                         <h3 className={classes.cardTitleWhite}>
-                          {substring_description(response.title, 4)}
+                          {substring_text(response.title, 4)}
                         </h3>
                       </a>
                       <p
                         className={classes.cardDescription}
                         className={classes.cardDescription}
                         dangerouslySetInnerHTML={{
-                          __html: substring_description(
+                          __html: substring_text(
                             strip_tags(response.description)
                           ),
                         }}
@@ -135,24 +108,20 @@ const SectionProjects = ({ ...rest }) => {
                     raised
                     background
                     style={{
-                      backgroundImage: `url(${
-                        cardProjectBg[
-                          Math.floor(Math.random() * cardProjectBg.length)
-                        ]
-                      })`,
+                      backgroundImage: `url(${response.urlToImage})`,
                     }}
                   >
                     <CardBody background>
                       <h6 className={classes.cardCategory}>MARKETING</h6>
                       <a href={"/study-guide/" + response.slug}>
                         <h3 className={classes.cardTitleWhite}>
-                          {substring_description(response.title, 4)}
+                          {substring_text(response.title, 4)}
                         </h3>
                       </a>
                       <p
                         className={classes.cardDescription}
                         dangerouslySetInnerHTML={{
-                          __html: substring_description(
+                          __html: substring_text(
                             strip_tags(response.description)
                           ),
                         }}

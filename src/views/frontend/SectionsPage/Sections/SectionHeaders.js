@@ -6,27 +6,15 @@ import axios from "axios";
 import Carousel from "react-slick";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// import List from "@material-ui/core/List";
-// import ListItem from "@material-ui/core/ListItem";
-// @material-ui/icons
-// import Share from "@material-ui/icons/Share";
-// import ShoppingCart from "@material-ui/icons/ShoppingCart";
-// core components
-// import Header from "components/frontend/Header/Header.js";
 import Button from "components/frontend/CustomButtons/Button.js";
 import GridContainer from "components/frontend/Grid/GridContainer.js";
 import GridItem from "components/frontend/Grid/GridItem.js";
 
 import headersStyle from "assets/jss/frontend/views/sectionsSections/headersStyle.js";
 
-import dg1 from "assets/img/dg1.jpg";
-import dg2 from "assets/img/dg2.jpg";
-import dg3 from "assets/img/dg3.jpg";
+import { strip_tags, substring_text } from "utils/functions";
 
-import {
-  strip_tags,
-  substring_description,
-} from "views/frontend/_partials/Miscellaneous.js";
+import { BACKEND_URL } from "services/api";
 
 const useStyles = makeStyles(headersStyle);
 
@@ -44,10 +32,8 @@ const SectionHeaders = ({ ...rest }) => {
     autoplay: false,
   };
 
-  const bgArray = [dg1, dg2, dg3];
-
   useEffect(() => {
-    axios.get("http://localhost:8000/api/posts/slider/").then((res) => {
+    axios.get(BACKEND_URL + "/api/posts/slider/").then((res) => {
       setSliderPosts(res.data);
     });
 
@@ -68,20 +54,18 @@ const SectionHeaders = ({ ...rest }) => {
               <div
                 className={classes.pageHeader}
                 style={{
-                  backgroundImage: `url("${
-                    bgArray[Math.floor(Math.random() * bgArray.length)]
-                  }")`,
+                  backgroundImage: `url("${response.urlToImage}")`,
                 }}
               >
                 <div className={classes.container}>
                   <GridContainer>
                     <GridItem xs={12} sm={8} md={8}>
                       <h1 className={classes.title}>
-                        {substring_description(response.title, 10)}
+                        {substring_text(response.title, 10)}
                       </h1>
                       <h4
                         dangerouslySetInnerHTML={{
-                          __html: substring_description(
+                          __html: substring_text(
                             strip_tags(response.description)
                           ),
                         }}

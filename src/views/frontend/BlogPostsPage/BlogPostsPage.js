@@ -1,6 +1,5 @@
 /*eslint-disable*/
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import List from "@material-ui/core/List";
@@ -11,7 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // import Header from "components/frontend/Header/Header.js";
 // import Button from "components/frontend/CustomButtons/Button.js";
 // import HeaderLinks from "components/frontend/Header/HeaderLinks.js";
-import Footer from "components/frontend/Footer/Footer.js";
+// import Footer from "components/frontend/Footer/Footer.js";
 import GridContainer from "components/frontend/Grid/GridContainer.js";
 import GridItem from "components/frontend/Grid/GridItem.js";
 import Parallax from "components/frontend/Parallax/Parallax.js";
@@ -32,8 +31,6 @@ import FooterBar from "views/frontend/_partials/FooterBar.js";
 const useStyles = makeStyles(blogPostsPageStyle);
 
 export default function BlogPostsPage() {
-  const history = useHistory();
-
   useEffect(() => {
     // CheckLoggedIn();
 

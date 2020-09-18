@@ -12,21 +12,18 @@ import Card from "components/frontend/Card/Card.js";
 import CardHeader from "components/frontend/Card/CardHeader.js";
 import CardBody from "components/frontend/Card/CardBody.js";
 import CardFooter from "components/frontend/Card/CardFooter.js";
-import CustomInput from "components/frontend/CustomInput/CustomInput.js";
+// import CustomInput from "components/frontend/CustomInput/CustomInput.js";
 import Danger from "components/frontend/Typography/Danger.js";
 import Success from "components/frontend/Typography/Success.js";
-import Button from "components/frontend/CustomButtons/Button.js";
+// import Button from "components/frontend/CustomButtons/Button.js";
 
 import styles from "assets/jss/frontend/views/componentsSections/sectionCards.js";
 
-import {
-  string_to_slug,
-  getRandomInt,
-} from "views/frontend/_partials/Miscellaneous.js";
+import { string_to_slug, getRandomInt } from "utils/functions";
 
-import { baseApiUrl } from "services/api.js";
+import { BACKEND_URL } from "services/api";
 
-import { news_api } from "key.js";
+// import { news_api } from "key.js";
 
 import { useInfiniteScroll } from "views/frontend/_partials/useInfiniteScroll.js";
 
@@ -129,7 +126,7 @@ const SectionCards = () => {
       return (
         <Card key={key} blog>
           <CardHeader image>
-            <a href={response.url}>
+            <a href={"/study-guide/" + response.slug}>
               <img src={response.urlToImage} alt="..." />
             </a>
             <div
@@ -212,25 +209,25 @@ const SectionCards = () => {
     }
   };
 
-  function handleClick() {
-    axios
-      .get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${news_api}`)
-      .then((res) => {
-        seedDatabase(res.data.articles);
-      });
+  // function handleClick() {
+  //   axios
+  //     .get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${news_api}`)
+  //     .then((res) => {
+  //       seedDatabase(res.data.articles);
+  //     });
 
-    axios
-      .get(
-        `https://newsapi.org/v2/everything?q=apple&from=2020-09-01&to=2020-09-01&sortBy=popularity&apiKey=${news_api}`
-      )
-      .then((res) => {
-        seedDatabase(res.data.articles);
-      });
+  //   axios
+  //     .get(
+  //       `https://newsapi.org/v2/everything?q=apple&from=2020-09-01&to=2020-09-01&sortBy=popularity&apiKey=${news_api}`
+  //     )
+  //     .then((res) => {
+  //       seedDatabase(res.data.articles);
+  //     });
 
-    window.location.reload();
+  //   window.location.reload();
 
-    return true;
-  }
+  //   return true;
+  // }
 
   function seedDatabase(response) {
     response.map((result) => {
@@ -238,7 +235,7 @@ const SectionCards = () => {
 
       axios({
         method: "get",
-        url: baseApiUrl + "/post/" + slug + "/",
+        url: BACKEND_URL + "/api/post/" + slug + "/",
       })
         .then((res) => {})
         .catch((error) => {
@@ -254,7 +251,7 @@ const SectionCards = () => {
 
             if (AuthHeader.authHeader()) {
               axios
-                .post(baseApiUrl + "/post/store", json, {
+                .post(BACKEND_URL + "/api/post/store", json, {
                   headers: AuthHeader.authHeader(),
                 })
                 .then((res) => {})
@@ -273,7 +270,7 @@ const SectionCards = () => {
       setPage(page + 1);
 
       axios
-        .get(baseApiUrl + "/posts/paginator/?page=" + (page + 1))
+        .get(BACKEND_URL + "/api/posts/paginator/?page=" + (page + 1))
         .then((res) => {
           setGridItem(res.data.results);
 
@@ -292,11 +289,13 @@ const SectionCards = () => {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    axios.get(baseApiUrl + "/posts/paginator/?page=" + page).then((res) => {
-      setGridItem(res.data.results);
+    axios
+      .get(BACKEND_URL + "/api/posts/paginator/?page=" + page)
+      .then((res) => {
+        setGridItem(res.data.results);
 
-      setIsFinished(false);
-    });
+        setIsFinished(false);
+      });
 
     // axios
     //   .get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${news_api}`)
@@ -331,7 +330,7 @@ const SectionCards = () => {
               <h3>Blog Cards</h3>
             </div> */}
             <GridContainer>
-              <GridItem xs={12} sm={12} md={8}>
+              {/* <GridItem xs={12} sm={12} md={8}>
                 <CustomInput
                   id="regular"
                   inputProps={{
@@ -350,7 +349,7 @@ const SectionCards = () => {
                 >
                   Seed Database
                 </Button>
-              </GridItem>
+              </GridItem> */}
 
               <GridItem xs={12} sm={6} md={6} lg={4}>
                 {firstGrid.array.map((response, i) => renderCard(i, response))}
