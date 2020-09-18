@@ -45,8 +45,6 @@ const CreateForm = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(createDetail);
-
     axios
       .post(baseApiUrl + "/post/store", createDetail, {
         headers: AuthHeader.authHeader(),

@@ -46,40 +46,52 @@ const SectionComments = (props) => {
     name: "",
     email: "",
     content: "",
+    post_id: 0,
   });
 
   const getComment = () => {
-    axios
-      .get(baseApiUrl + `/post/${rest.slug}/comments/`)
-      .then((res) => {
-        if (res.data.length > 0) {
-          setCommentDetails({
-            length: res.data.length,
-            data: res.data,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error.response.status);
+    if (isFetching) {
+      axios.get(baseApiUrl + `/post/${rest.slug}/`).then((res) => {
+        setStoreComment({
+          ...storeComment,
+          post_id: res.data.id,
+        });
       });
-
-    console.log(userContext);
-
-    if (userContext.isAuthenticated && isFetching) {
-      setStoreComment({
-        ...storeComment,
-        name: userContext.user.username,
-        email: userContext.user.email,
-      });
-
-      setIsFetching(false);
+      axios
+        .get(baseApiUrl + `/post/${rest.slug}/comments/`)
+        .then((res) => {
+          if (res.data.length > 0) {
+            setCommentDetails({
+              length: res.data.length,
+              data: res.data,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.status);
+        });
     }
+
+    if (userContext.isAuthenticated) {
+      storeComment.name = userContext.user.username;
+
+      storeComment.email = userContext.user.email;
+    }
+
+    setIsFetching(false);
   };
 
   const handleComment = (e) => {
     e.preventDefault();
 
-    console.log(storeComment);
+    axios
+      .post(baseApiUrl + `/post/${rest.slug}/comments/`, storeComment)
+      .then((res) => {
+        setIsFetching(true);
+        document.getElementById("content").value = "";
+        getComment();
+      })
+      .catch((error) => {});
   };
 
   useEffect(() => {
@@ -196,10 +208,11 @@ const SectionComments = (props) => {
                     </GridItem>
                   </GridContainer>
                   <CustomInput
-                    id="not-logged-message"
+                    id="content"
                     formControlProps={{
                       fullWidth: true,
                     }}
+                    // value={storeComment.content}
                     inputProps={{
                       multiline: true,
                       rows: 6,
@@ -244,7 +257,8 @@ const SectionComments = (props) => {
               body={
                 <CustomInput
                   labelText=" Write some nice stuff or nothing..."
-                  id="nice"
+                  id="content"
+                  value={storeComment.content}
                   formControlProps={{
                     fullWidth: true,
                   }}
