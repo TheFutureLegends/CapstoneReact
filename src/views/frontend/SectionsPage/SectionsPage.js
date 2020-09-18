@@ -9,9 +9,9 @@ import { makeStyles } from "@material-ui/core/styles";
 // import SectionTestimonials from "./Sections/SectionTestimonials.js";
 // sections of this Page
 import SectionHeaders from "./Sections/SectionHeaders.js";
-import SectionFeatures from "./Sections/SectionFeatures.js";
+// import SectionFeatures from "./Sections/SectionFeatures.js";
 import SectionBlogs from "./Sections/SectionBlogs.js";
-import SectionTeams from "./Sections/SectionTeams.js";
+// import SectionTeams from "./Sections/SectionTeams.js";
 import SectionProjects from "./Sections/SectionProjects.js";
 
 import SectionContacts from "./Sections/SectionContacts.js";

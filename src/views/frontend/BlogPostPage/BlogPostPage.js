@@ -43,13 +43,13 @@ const BlogPostPage = (props) => {
   });
 
   useEffect(() => {
-    axios
-      .get(
-        `https://api.nytimes.com/svc/topstories/v2/world.json?api-key=${nytime_api}`
-      )
-      .then((res) => {
-        // console.log(res);
-      });
+    // axios
+    //   .get(
+    //     `https://api.nytimes.com/svc/topstories/v2/world.json?api-key=${nytime_api}`
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //   });
     axios.get(baseApiUrl + "/post/" + props.match.params.slug).then((res) => {
       setBlogPost({
         image: res.data.urlToImage,

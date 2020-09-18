@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -20,8 +20,11 @@ import sectionCommentsStyle from "assets/jss/frontend/views/blogPostSections/sec
 
 const useStyles = makeStyles(sectionCommentsStyle);
 
-export default function SectionComments() {
+const SectionComments = (props) => {
+  const { ...rest } = props;
+
   const classes = useStyles();
+
   return (
     <div className={classes.section}>
       <GridContainer justify="center">
@@ -179,4 +182,6 @@ export default function SectionComments() {
       </GridContainer>
     </div>
   );
-}
+};
+
+export default SectionComments;

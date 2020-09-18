@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -18,6 +18,8 @@ const useStyles = makeStyles(headersStyle);
 const navbarStyles = makeStyles(navbarsStyle);
 
 const NavBar = () => {
+  let history = useHistory();
+  
   // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = AuthService.CheckAuthenticatedUser();
 
@@ -31,7 +33,9 @@ const NavBar = () => {
   const navbarClasses = navbarStyles();
 
   function handleLogout() {
-    AuthService.logout();
+    AuthService.Logout();
+
+    history.push("/login");
 
     window.location.reload();
   }
@@ -89,7 +93,7 @@ const NavBar = () => {
               About us
             </Button>
           </ListItem>
-          <ListItem className={classes.listItem}>
+          {/* <ListItem className={classes.listItem}>
             <Button
               href="/contact-us"
               className={classes.navLink}
@@ -97,7 +101,7 @@ const NavBar = () => {
             >
               Contact us
             </Button>
-          </ListItem>
+          </ListItem> */}
           {/* {getAuthUser()} */}
           {isLoggedIn ? (
             <ListItem className={classes.listItem}>

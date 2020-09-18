@@ -26,6 +26,8 @@ import Button from "components/backend/CustomButtons/Button.js";
 
 import styles from "assets/jss/backend/components/adminNavbarLinksStyle.js";
 
+import AuthService from "services/auth.service";
+
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
@@ -55,6 +57,12 @@ export default function HeaderLinks(props) {
 
   const handleCloseProfile = () => {
     setOpenProfile(null);
+  };
+
+  const handleLogout = () => {
+    AuthService.Logout();
+
+    window.location.reload();
   };
 
   const classes = useStyles();
@@ -288,10 +296,7 @@ export default function HeaderLinks(props) {
                       {rtlActive ? "الإعدادات" : "Settings"}
                     </MenuItem>
                     <Divider light />
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      className={dropdownItem}
-                    >
+                    <MenuItem onClick={handleLogout} className={dropdownItem}>
                       {rtlActive ? "الخروج" : "Log out"}
                     </MenuItem>
                   </MenuList>

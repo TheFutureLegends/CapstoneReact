@@ -99,28 +99,29 @@ const login = (username, password) => {
     });
 };
 
-const register = (username, email, password) => {
-  return axios
-    .post(authUrl + "/users/", {
-      username: username,
-      email: email,
-      password: password,
-    })
-    .then((response) => {
-      return response.data;
-    });
+const register = (registerDetail) => {
+  return axios.post(authUrl + "/users/", registerDetail).then((res) => {
+    return res.status;
+  });
 };
 
+// const register = (username, email, password) => {
+//   return axios
+//     .post(authUrl + "/users/", {
+//       username: username,
+//       email: email,
+//       password: password,
+//     })
+//     .then((response) => {
+//       return response.data;
+//     });
+// };
+
 const Logout = () => {
-  let history = useHistory();
 
   localStorage.removeItem("user_access");
 
   localStorage.removeItem("user_refresh");
-
-  history.push("/login");
-
-  window.location.reload();
 };
 
 const getCurrentAuthenticatedUsername = () => {

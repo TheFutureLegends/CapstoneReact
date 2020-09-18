@@ -27,7 +27,7 @@ import signupPageStyle from "assets/jss/frontend/views/signupPageStyle.js";
 import NavBar from "views/frontend/_partials/NavBar";
 
 import image from "assets/img/bg7.jpg";
-// import AuthService from "services/auth.service";
+import AuthService from "services/auth.service";
 
 const useStyles = makeStyles(loginPageStyle);
 const signupStyles = makeStyles(signupPageStyle);
@@ -61,12 +61,8 @@ const RegisterPage = () => {
   const submitForm = (e) => {
     e.preventDefault();
 
-    // AuthService.login(username, password).then(() => {
-    //   history.push("/");
-    //   window.location.reload();
-    // });
-    axios.post("http://localhost:8000/auth/users/", registerDetail).then(() => {
-      history.push("/");
+    AuthService.register(registerDetail).then(() => {
+      history.push("/login");
       window.location.reload();
     });
   };

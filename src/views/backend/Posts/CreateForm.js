@@ -32,64 +32,28 @@ const CreateForm = () => {
 
   const authUser = useContext(Context);
 
-  const [title, setTitle] = useState("");
-
-  const [description, setDescription] = useState("");
-
-  const [urlToImage, setUrlToImage] = useState("");
-
-  const [content, setContent] = useState("");
+  const [createDetail, setCreateDetail] = useState({
+    title: "",
+    description: "",
+    urlToImage: "",
+    content: "",
+    author_id: authUser.user.id,
+  });
 
   const regularFormClasses = regularFormStyle();
-
-  function handleTitleChange(e) {
-    setTitle(e.target.value);
-  }
-
-  function handleDescriptionChange(e) {
-    setDescription(e.target.value);
-  }
-
-  function handleUrlChange(e) {
-    setUrlToImage(e.target.value);
-  }
-
-  function handleEditorChange(content, editor) {
-    setContent(content);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("Title: " + title);
-
-    console.log("URL To Image: " + urlToImage);
-
-    console.log("Description: " + description);
-
-    console.log("Content: " + content);
-
-    console.log("Users: ");
-
-    console.log(authUser);
+    console.log(createDetail);
 
     axios
-      .post(
-        baseApiUrl + "/post/store",
-        {
-          title: title,
-          description: description,
-          content: content,
-          urlToImage: urlToImage,
-          author_id: authUser.id,
-        },
-        {
-          headers: AuthHeader.authHeader(),
-        }
-      )
+      .post(baseApiUrl + "/post/store", createDetail, {
+        headers: AuthHeader.authHeader(),
+      })
       .then((response) => {
         history.push("/admin/posts");
-        
+
         window.location.reload();
       })
       .catch((error) => {
@@ -99,7 +63,7 @@ const CreateForm = () => {
 
   useEffect(() => {
     // console.log("Content: " + content);
-  }, [content]);
+  }, [authUser, createDetail]);
 
   return (
     <GridItem xs={12} sm={12} md={12}>
@@ -126,7 +90,12 @@ const CreateForm = () => {
                   inputProps={{
                     type: "text",
                     placeholder: "Please enter title for your post",
-                    onChange: handleTitleChange,
+                    onChange: (e) => {
+                      setCreateDetail({
+                        ...createDetail,
+                        title: e.target.value,
+                      });
+                    },
                   }}
                   helpText="A block of help text that breaks onto a new line."
                 />
@@ -147,7 +116,12 @@ const CreateForm = () => {
                   inputProps={{
                     type: "text",
                     autoComplete: "off",
-                    onChange: handleUrlChange,
+                    onChange: (e) => {
+                      setCreateDetail({
+                        ...createDetail,
+                        urlToImage: e.target.value,
+                      });
+                    },
                   }}
                 />
               </GridItem>
@@ -166,7 +140,12 @@ const CreateForm = () => {
                   }}
                   inputProps={{
                     placeholder: "Please describe your post",
-                    onChange: handleDescriptionChange,
+                    onChange: (e) => {
+                      setCreateDetail({
+                        ...createDetail,
+                        description: e.target.value,
+                      });
+                    },
                   }}
                 />
               </GridItem>
@@ -200,7 +179,12 @@ const CreateForm = () => {
                     toolbar:
                       "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat link image",
                   }}
-                  onEditorChange={handleEditorChange}
+                  onEditorChange={(content, editor) => {
+                    setCreateDetail({
+                      ...createDetail,
+                      content: content,
+                    });
+                  }}
                 />
               </GridItem>
             </GridContainer>
